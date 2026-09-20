@@ -1,0 +1,12 @@
+{
+  "name": "freelancer-marketplace",
+  "version": "1.0.0",
+  "description": "Freelancer Marketplace Web Application",
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
