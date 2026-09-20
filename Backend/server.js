@@ -3,6 +3,7 @@ const cors = require("cors");
 const path = require("path");
 
 const db = require("./db");
+
 const dashboardRoutes = require("./routes/dashboard");
 const categoryRoutes = require("./routes/categories");
 const authRoutes = require("./routes/auth");
@@ -17,21 +18,35 @@ const reviewRoutes = require("./routes/reviews");
 
 const app = express();
 
+/* =========================
+   MIDDLEWARE
+========================= */
+
 app.use(cors());
 app.use(express.json());
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/categories", categoryRoutes);
-/* Serve Frontend */
-app.use(
-    express.static(
-        path.join(__dirname, "../Frontend")
-    )
-);
+
+
+/* =========================
+   FRONTEND PATH
+========================= */
+
+const frontendPath = path.resolve(__dirname, "..", "Frontend");
+
+
+/* =========================
+   SERVE FRONTEND
+========================= */
+
+app.use(express.static(frontendPath));
 
 
 /* =========================
    API ROUTES
 ========================= */
+
+app.use("/api/dashboard", dashboardRoutes);
+
+app.use("/api/categories", categoryRoutes);
 
 app.use("/api/auth", authRoutes);
 
@@ -57,14 +72,9 @@ app.use("/api/reviews", reviewRoutes);
 ========================= */
 
 app.get("/", (req, res) => {
-
     res.sendFile(
-        path.join(
-            __dirname,
-            "../Frontend/index.html"
-        )
+        path.join(frontendPath, "index.html")
     );
-
 });
 
 
@@ -87,16 +97,14 @@ app.get("/api/test-db", (req, res) => {
 
                 return res.status(500).json({
                     success: false,
-                    message:
-                        "Database connection failed!"
+                    message: "Database connection failed!"
                 });
 
             }
 
             res.json({
                 success: true,
-                message:
-                    "Database connection is working!",
+                message: "Database connection is working!",
                 result
             });
 
@@ -107,10 +115,24 @@ app.get("/api/test-db", (req, res) => {
 
 
 /* =========================
+   API 404
+========================= */
+
+app.use("/api", (req, res) => {
+
+    res.status(404).json({
+        success: false,
+        message: "API endpoint not found."
+    });
+
+});
+
+
+/* =========================
    SERVER
 ========================= */
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
 
