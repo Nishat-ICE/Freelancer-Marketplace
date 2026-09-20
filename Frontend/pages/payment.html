@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | Freelancer Marketplace</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+
+    <style>
+
+        /* ========================================
+           PAGE
+        ======================================== */
+
+        .payment-page {
+
+            padding: 35px;
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .payment-header {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .payment-header h2 {
+
+            margin: 0 0 6px;
+
+            color: #211b45;
+
+            font-size: 30px;
+
+        }
+
+
+        .payment-header p {
+
+            margin: 0;
+
+            color: #888;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ========================================
+           SUMMARY
+        ======================================== */
+
+        .payment-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .summary-card {
+
+            background: white;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(71,55,120,.06);
+
+        }
+
+
+        .summary-card span {
+
+            display: block;
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .summary-card strong {
+
+            color: #29224e;
+
+            font-size: 25px;
+
+        }
+
+
+        /* ========================================
+           MAKE PAYMENT
+        ======================================== */
+
+        .make-payment {
+
+            background: white;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(71,55,120,.06);
+
+        }
+
+
+        .make-payment h3 {
+
+            margin: 0 0 5px;
+
+            color: #29224e;
+
+            font-size: 20px;
+
+        }
+
+
+        .payment-description {
+
+            margin: 0 0 20px;
+
+            color: #888;
+
+            font-size: 13px;
+
+        }
+
+
+        .payment-form {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr auto;
+
+            gap: 15px;
+
+            align-items: end;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .form-group label {
+
+            margin-bottom: 7px;
+
+            color: #555;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-group select,
+
+        .form-group input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 12px 13px;
+
+            border: 1px solid #ddd8ef;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+
+            color: #333;
+
+            font-size: 13px;
+
+        }
+
+
+        .form-group select:focus,
+
+        .form-group input:focus {
+
+            border-color: #7656d6;
+
+        }
+
+
+        .pay-btn {
+
+            border: none;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7656d6,
+                    #5941a9
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+            white-space: nowrap;
+
+        }
+
+
+        .pay-btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px
+                rgba(89,65,169,.25);
+
+        }
+
+
+        .pay-btn:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        .payment-message {
+
+            margin-top: 15px;
+
+            padding: 11px 14px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            display: none;
+
+        }
+
+
+        .payment-message.success {
+
+            display: block;
+
+            background: #eafaf1;
+
+            color: #16834b;
+
+        }
+
+
+        .payment-message.error {
+
+            display: block;
+
+            background: #ffeded;
+
+            color: #c03939;
+
+        }
+
+
+        /* ========================================
+           PAYMENT LIST
+        ======================================== */
+
+        .payment-section {
+
+            background: white;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(71,55,120,.06);
+
+        }
+
+
+        .payment-section h3 {
+
+            margin: 0 0 20px;
+
+            color: #29224e;
+
+            font-size: 20px;
+
+        }
+
+
+        .payment-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .payment-item {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                130px
+                110px
+                110px;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 17px;
+
+            background: #faf9ff;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 12px;
+
+        }
+
+
+        .payment-project strong {
+
+            display: block;
+
+            color: #29224e;
+
+            font-size: 14px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .payment-project span {
+
+            color: #999;
+
+            font-size: 11px;
+
+        }
+
+
+        .payment-amount {
+
+            color: #29224e;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+        }
+
+
+        .payment-method {
+
+            color: #666;
+
+            font-size: 13px;
+
+            text-transform: capitalize;
+
+        }
+
+
+        .payment-status {
+
+            display: inline-block;
+
+            width: fit-content;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            text-transform: capitalize;
+
+        }
+
+
+        .payment-status.paid {
+
+            background: #eafaf1;
+
+            color: #16834b;
+
+        }
+
+
+        .payment-status.pending {
+
+            background: #fff5df;
+
+            color: #a86a00;
+
+        }
+
+
+        .payment-status.failed {
+
+            background: #ffeded;
+
+            color: #c03939;
+
+        }
+
+
+        /* ========================================
+           EMPTY
+        ======================================== */
+
+        .payment-empty {
+
+            text-align: center;
+
+            padding: 65px 20px;
+
+        }
+
+
+        .payment-empty-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .payment-empty h3 {
+
+            margin: 0 0 8px;
+
+            color: #29224e;
+
+        }
+
+
+        .payment-empty p {
+
+            margin: 0;
+
+            color: #888;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ========================================
+           LOADING
+        ======================================== */
+
+        .payment-loading {
+
+            text-align: center;
+
+            padding: 60px;
+
+            color: #888;
+
+        }
+
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media(max-width: 1000px) {
+
+            .payment-form {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 900px) {
+
+            .payment-item {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .payment-page {
+
+                padding: 20px;
+
+            }
+
+
+            .payment-summary {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .payment-form {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .payment-item {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     SIDEBAR
+======================================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <strong>Freelancer</strong>
+
+        <span>Marketplace</span>
+
+    </div>
+
+
+    <div class="sidebar-nav">
+
+
+        <a href="dashboard.html"
+           class="nav-item">
+
+            🏠
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="projects.html"
+           class="nav-item">
+
+            📁
+
+            <span>Browse Projects</span>
+
+        </a>
+
+
+        <a href="my-projects.html"
+           class="nav-item client-only">
+
+            📂
+
+            <span>My Projects</span>
+
+        </a>
+
+
+        <a href="bids.html"
+           class="nav-item freelancer-only">
+
+            📋
+
+            <span>My Bids</span>
+
+        </a>
+
+
+        <a href="messages.html"
+           class="nav-item">
+
+            💬
+
+            <span>Messages</span>
+
+        </a>
+
+
+        <a href="notifications.html"
+           class="nav-item">
+
+            🔔
+
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="profile.html"
+           class="nav-item">
+
+            👤
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="payment.html"
+           class="nav-item active">
+
+            💳
+
+            <span>Payment</span>
+
+        </a>
+
+
+        <a href="contracts.html"
+           class="nav-item">
+
+            📄
+
+            <span>Contracts</span>
+
+        </a>
+
+
+        <a href="reviews.html"
+           class="nav-item">
+
+            ⭐
+
+            <span>Reviews</span>
+
+        </a>
+
+
+        <a href="#"
+           class="nav-item"
+           onclick="logoutUser()">
+
+            🚪
+
+            <span>Logout</span>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<div class="main-content">
+
+    <div class="payment-page">
+
+
+        <div class="payment-header">
+
+            <h2>Payments</h2>
+
+            <p>
+                Manage your contract payments and transaction history
+            </p>
+
+        </div>
+
+
+
+        <!-- ========================================
+             SUMMARY
+        ======================================== -->
+
+        <div class="payment-summary">
+
+
+            <div class="summary-card">
+
+                <span>
+                    Total Payments
+                </span>
+
+                <strong id="totalPayments">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Total Paid
+                </span>
+
+                <strong id="totalPaid">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>
+                    Pending
+                </span>
+
+                <strong id="totalPending">
+                    $0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             MAKE PAYMENT
+        ======================================== -->
+
+        <div class="make-payment">
+
+            <h3>
+                Make a Payment
+            </h3>
+
+            <p class="payment-description">
+                Select an active contract and record a payment.
+            </p>
+
+
+            <form
+                id="paymentForm"
+                class="payment-form">
+
+
+                <!-- CONTRACT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Contract / Project
+                    </label>
+
+                    <select
+                        id="contractSelect"
+                        required>
+
+                        <option value="">
+                            Loading contracts...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Amount ($)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="paymentAmount"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Enter amount"
+                        required>
+
+                </div>
+
+
+                <!-- METHOD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Payment Method
+                    </label>
+
+                    <select
+                        id="paymentMethod"
+                        required>
+
+                        <option value="">
+                            Select method
+                        </option>
+
+                        <option value="card">
+                            Card
+                        </option>
+
+                        <option value="bkash">
+                            bKash
+                        </option>
+
+                        <option value="bank">
+                            Bank
+                        </option>
+
+                        <option value="cash">
+                            Cash
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="pay-btn"
+                    id="payButton">
+
+                    Pay Now
+
+                </button>
+
+
+            </form>
+
+
+            <div
+                id="paymentMessage"
+                class="payment-message">
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             PAYMENT HISTORY
+        ======================================== -->
+
+        <div class="payment-section">
+
+            <h3>
+                Payment History
+            </h3>
+
+
+            <div
+                id="paymentList"
+                class="payment-list">
+
+                <div class="payment-loading">
+
+                    Loading payments...
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+
+// ========================================
+// USER
+// ========================================
+
+const user = getCurrentUser();
+
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+// ========================================
+// ROLE SIDEBAR
+// ========================================
+
+const clientItems =
+    document.querySelectorAll(".client-only");
+
+const freelancerItems =
+    document.querySelectorAll(".freelancer-only");
+
+
+if (user.role === "client") {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+} else {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+}
+
+
+// ========================================
+// LOAD SUMMARY
+// ========================================
+
+async function loadSummary() {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/payments/summary/${user.user_id}`
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            return;
+
+        }
+
+
+        const summary =
+            data.summary;
+
+
+        document.getElementById(
+            "totalPayments"
+        ).textContent =
+            summary.total_payments || 0;
+
+
+        document.getElementById(
+            "totalPaid"
+        ).textContent =
+            "$" +
+            Number(
+                summary.total_paid || 0
+            ).toFixed(2);
+
+
+        document.getElementById(
+            "totalPending"
+        ).textContent =
+            "$" +
+            Number(
+                summary.total_pending || 0
+            ).toFixed(2);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+// ========================================
+// LOAD CONTRACTS
+// ========================================
+
+async function loadContracts() {
+
+    const select =
+        document.getElementById(
+            "contractSelect"
+        );
+
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/payments/contracts/${user.user_id}`
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load contracts."
+            );
+
+        }
+
+
+        const contracts =
+            data.contracts || [];
+
+
+        select.innerHTML = `
+            <option value="">
+                Select contract
+            </option>
+        `;
+
+
+        if (contracts.length === 0) {
+
+            select.innerHTML = `
+                <option value="">
+                    No active contracts
+                </option>
+            `;
+
+            return;
+
+        }
+
+
+        contracts.forEach(contract => {
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                contract.contract_id;
+
+
+            option.textContent =
+                `${contract.project_title} — $${Number(
+                    contract.payment_amount || 0
+                ).toFixed(2)}`;
+
+
+            option.dataset.amount =
+                contract.payment_amount || 0;
+
+
+            select.appendChild(option);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        select.innerHTML = `
+            <option value="">
+                Failed to load contracts
+            </option>
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// AUTO-FILL CONTRACT AMOUNT
+// ========================================
+
+document
+    .getElementById("contractSelect")
+    .addEventListener(
+        "change",
+        function () {
+
+            const option =
+                this.options[this.selectedIndex];
+
+
+            if (
+                option &&
+                option.dataset.amount
+            ) {
+
+                document.getElementById(
+                    "paymentAmount"
+                ).value =
+                    Number(
+                        option.dataset.amount
+                    ).toFixed(2);
+
+            } else {
+
+                document.getElementById(
+                    "paymentAmount"
+                ).value = "";
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// PAYMENT FORM
+// ========================================
+
+document
+    .getElementById("paymentForm")
+    .addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const contractId =
+                document.getElementById(
+                    "contractSelect"
+                ).value;
+
+
+            const amount =
+                document.getElementById(
+                    "paymentAmount"
+                ).value;
+
+
+            const method =
+                document.getElementById(
+                    "paymentMethod"
+                ).value;
+
+
+            const button =
+                document.getElementById(
+                    "payButton"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "paymentMessage"
+                );
+
+
+            // ----------------------------------------
+            // VALIDATION
+            // ----------------------------------------
+
+            if (!contractId) {
+
+                showMessage(
+                    "Please select a contract.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !amount ||
+                Number(amount) <= 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid payment amount.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!method) {
+
+                showMessage(
+                    "Please select a payment method.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            // ----------------------------------------
+            // BUTTON LOADING
+            // ----------------------------------------
+
+            button.disabled = true;
+
+            button.textContent =
+                "Processing...";
+
+
+            message.className =
+                "payment-message";
+
+
+            message.textContent = "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/payments",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                user_id:
+                                    user.user_id,
+
+                                contract_id:
+                                    Number(contractId),
+
+                                amount:
+                                    Number(amount),
+
+                                method:
+                                    method
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Payment failed."
+                    );
+
+                }
+
+
+                // ----------------------------------------
+                // SUCCESS
+                // ----------------------------------------
+
+                showMessage(
+                    data.message ||
+                    "Payment recorded successfully!",
+                    "success"
+                );
+
+
+                document.getElementById(
+                    "paymentForm"
+                ).reset();
+
+
+                await loadSummary();
+
+                await loadPayments();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    error.message ||
+                    "Payment failed.",
+                    "error"
+                );
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Pay Now";
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// MESSAGE
+// ========================================
+
+function showMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "paymentMessage"
+        );
+
+
+    message.textContent = text;
+
+
+    message.className =
+        `payment-message ${type}`;
+
+}
+
+
+// ========================================
+// LOAD PAYMENTS
+// ========================================
+
+async function loadPayments() {
+
+    const container =
+        document.getElementById(
+            "paymentList"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `http://localhost:5000/api/payments/my/${user.user_id}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load payments."
+            );
+
+        }
+
+
+        const payments =
+            data.payments || [];
+
+
+        if (
+            payments.length === 0
+        ) {
+
+            container.innerHTML = `
+
+                <div class="payment-empty">
+
+                    <div class="payment-empty-icon">
+                        💳
+                    </div>
+
+                    <h3>
+                        No Payments Yet
+                    </h3>
+
+                    <p>
+                        Your payment history will
+                        appear here after a contract
+                        payment is recorded.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            payments.map(
+                payment => `
+
+                <div class="payment-item">
+
+
+                    <div class="payment-project">
+
+                        <strong>
+
+                            ${escapeHtml(
+                                payment.project_title
+                            )}
+
+                        </strong>
+
+                        <span>
+
+                            Payment #${payment.payment_id}
+
+                            ·
+
+                            ${formatDate(
+                                payment.payment_date
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="payment-amount">
+
+                        $${Number(
+                            payment.amount || 0
+                        ).toFixed(2)}
+
+                    </div>
+
+
+                    <div class="payment-method">
+
+                        ${escapeHtml(
+                            payment.method
+                        )}
+
+                    </div>
+
+
+                    <span
+                        class="
+                            payment-status
+                            ${payment.status}
+                        ">
+
+                        ${escapeHtml(
+                            payment.status
+                        )}
+
+                    </span>
+
+
+                </div>
+
+            `
+            ).join("");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+            <div class="payment-empty">
+
+                <div class="payment-empty-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Failed to Load Payments
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// DATE
+// ========================================
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "N/A";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            month: "short",
+
+            day: "numeric",
+
+            year: "numeric"
+        }
+    );
+
+}
+
+
+// ========================================
+// ESCAPE HTML
+// ========================================
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// ========================================
+// START
+// ========================================
+
+loadSummary();
+
+loadContracts();
+
+loadPayments();
+
+</script>
+
+
+</body>
+
+</html>

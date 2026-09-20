@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Projects | Freelancer Marketplace</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f6ff;
+            color: #222;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 300px;
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    160deg,
+                    #4f46e5,
+                    #6d4ad8 55%,
+                    #7c3aed
+                );
+
+            color: white;
+
+            padding: 28px 18px;
+
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h2 {
+            font-size: 24px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            opacity: .8;
+            margin-top: 5px;
+        }
+
+        .sidebar a {
+            display: block;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 16px;
+
+            margin: 6px 0;
+
+            border-radius: 10px;
+
+            transition: .2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(255,255,255,.18);
+        }
+
+        .logout {
+            margin-top: 20px;
+
+            border-top:
+                1px solid rgba(255,255,255,.2);
+
+            padding-top: 20px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main-content {
+            margin-left: 300px;
+
+            width: calc(100% - 300px);
+
+            min-height: 100vh;
+
+            padding: 35px 40px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            color: #27204f;
+
+            font-size: 30px;
+        }
+
+        .page-header p {
+            color: #777;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================
+           FILTER BAR
+        ========================= */
+
+        .filter-bar {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 220px;
+
+            gap: 15px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.06);
+        }
+
+        .filter-bar input,
+        .filter-bar select {
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .filter-bar input:focus,
+        .filter-bar select:focus {
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(99,102,241,.1);
+        }
+
+
+        /* =========================
+           PROJECT GRID
+        ========================= */
+
+        .projects-grid {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 22px;
+        }
+
+
+        /* =========================
+           PROJECT CARD
+        ========================= */
+
+        .project-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.07);
+
+            transition: .2s;
+        }
+
+        .project-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.1);
+        }
+
+
+        .project-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+
+            color: #312e81;
+
+            font-size: 21px;
+
+            line-height: 1.3;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            text-transform: capitalize;
+        }
+
+        .status-open {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .status-assigned {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status-in_progress {
+            background: #fefce8;
+            color: #a16207;
+        }
+
+        .status-completed {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-cancelled {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+
+        /* =========================
+           CATEGORY
+        ========================= */
+
+        .category {
+
+            display: inline-block;
+
+            background: #ede9fe;
+
+            color: #5b21b6;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .description {
+
+            color: #666;
+
+            line-height: 1.6;
+
+            margin-bottom: 18px;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 4;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .project-info {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+        }
+
+        .info-box {
+
+            background: #f8f7ff;
+
+            padding: 12px;
+
+            border-radius: 10px;
+        }
+
+        .info-box small {
+
+            display: block;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        .info-box strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #333;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .project-footer {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid #eee;
+        }
+
+
+        .btn {
+
+            border: none;
+
+            padding: 10px 16px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: .2s;
+        }
+
+        .btn-primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146e5,
+                    #7c3aed
+                );
+
+            color: white;
+        }
+
+        .btn-primary:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(81,70,229,.25);
+        }
+
+        .btn-disabled {
+
+            background: #f1f1f1;
+
+            color: #888;
+
+            cursor: default;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 70px 25px;
+
+            text-align: center;
+
+            color: #777;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.06);
+
+            grid-column: 1 / -1;
+        }
+
+        .empty h2 {
+
+            color: #312e81;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(20,16,50,.55);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 600px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.2);
+        }
+
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .modal-header h2 {
+            color: #312e81;
+        }
+
+        .close {
+
+            border: none;
+
+            background: #f3f4f6;
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 20px;
+        }
+
+
+        /* =========================
+           BID FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #444;
+
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(99,102,241,.1);
+        }
+
+        .form-actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            margin-top: 22px;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #312e81;
+
+            color: white;
+
+            padding: 14px 20px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.18);
+
+            display: none;
+
+            z-index: 2000;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 1000px) {
+
+            .sidebar {
+                width: 230px;
+            }
+
+            .main-content {
+
+                margin-left: 230px;
+
+                width:
+                    calc(100% - 230px);
+            }
+
+            .projects-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+            }
+
+            .main-content {
+
+                margin-left: 0;
+
+                width: 100%;
+
+                padding:
+                    25px 18px;
+            }
+
+            .filter-bar {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .project-info {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .project-header {
+
+                flex-direction: column;
+            }
+
+            .project-footer {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <h2>Freelancer</h2>
+
+        <p>Marketplace</p>
+
+    </div>
+
+
+    <a href="dashboard.html">
+        Dashboard
+    </a>
+
+
+    <a href="projects.html"
+       class="active">
+        Browse Projects
+    </a>
+
+
+    <a href="my-projects.html"
+       id="myProjectsLink">
+        My Projects
+    </a>
+
+
+    <a href="bids.html">
+        My Bids
+    </a>
+
+
+    <a href="messages.html">
+        Messages
+    </a>
+
+
+    <a href="notifications.html">
+        Notifications
+    </a>
+
+
+    <a href="profile.html">
+        Profile
+    </a>
+
+
+    <a href="payment.html">
+        Payment
+    </a>
+
+
+    <a href="contracts.html">
+        Contracts
+    </a>
+
+
+    <a href="reviews.html">
+        Reviews
+    </a>
+
+
+    <div class="logout">
+
+        <a href="#"
+           onclick="logout()">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div class="main-content">
+
+
+    <div class="page-header">
+
+        <h1>
+            Browse Projects
+        </h1>
+
+        <p>
+            Find projects and opportunities
+            that match your skills.
+        </p>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filter-bar">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search projects by title or description...">
+
+
+        <select id="categoryFilter">
+
+            <option value="">
+                All Categories
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div
+        id="projectsContainer"
+        class="projects-grid">
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     BID MODAL
+===================================================== -->
+
+<div
+    id="bidModal"
+    class="modal">
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Place Your Bid
+            </h2>
+
+
+            <button
+                class="close"
+                onclick="closeBidModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="selectedProjectInfo"
+            style="
+                background:#f8f7ff;
+                padding:15px;
+                border-radius:10px;
+                margin-bottom:20px;
+            ">
+
+        </div>
+
+
+        <form
+            id="bidForm">
+
+
+            <input
+                type="hidden"
+                id="bidProjectId">
+
+
+            <div class="form-group">
+
+                <label>
+                    Bid Amount ($)
+                </label>
+
+                <input
+                    type="number"
+                    id="bidAmount"
+                    min="1"
+                    step="0.01"
+                    placeholder="Enter your bid amount"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Proposal
+                </label>
+
+                <textarea
+                    id="bidProposal"
+                    placeholder="Explain why you are suitable for this project..."
+                    required></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-disabled"
+                    onclick="closeBidModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Submit Bid
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast">
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+const user =
+    JSON.parse(
+        localStorage.getItem("user")
+    );
+
+
+if (!user) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let allProjects = [];
+
+
+/* =====================================================
+   LOAD PROJECTS
+===================================================== */
+
+async function loadProjects() {
+
+    const container =
+        document.getElementById(
+            "projectsContainer"
+        );
+
+
+    container.innerHTML = `
+        <div class="empty">
+
+            <h2>
+                Loading Projects...
+            </h2>
+
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/projects"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            container.innerHTML = `
+                <div class="empty">
+
+                    <h2>
+                        Failed to Load Projects
+                    </h2>
+
+                    <p>
+                        ${escapeHTML(
+                            data.message ||
+                            "Something went wrong."
+                        )}
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        allProjects =
+            data.projects || [];
+
+
+        populateCategoryFilter(
+            allProjects
+        );
+
+
+        displayProjects(
+            allProjects
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Load Projects Error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <h2>
+                    Server Error
+                </h2>
+
+                <p>
+                    Could not connect to server.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   CATEGORY FILTER
+===================================================== */
+
+function populateCategoryFilter(
+    projects
+) {
+
+    const select =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+
+    const categories =
+        [
+            ...new Map(
+                projects
+                    .filter(
+                        p => p.category_id
+                    )
+                    .map(
+                        p => [
+                            p.category_id,
+                            p.category_name ||
+                            "General"
+                        ]
+                    )
+            ).entries()
+        ];
+
+
+    select.innerHTML = `
+        <option value="">
+            All Categories
+        </option>
+    `;
+
+
+    categories.forEach(
+        ([id, name]) => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                id;
+
+            option.textContent =
+                name;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DISPLAY PROJECTS
+===================================================== */
+
+function displayProjects(
+    projects
+) {
+
+    const container =
+        document.getElementById(
+            "projectsContainer"
+        );
+
+
+    if (projects.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <h2>
+                    No Projects Found
+                </h2>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        projects.map(
+            project =>
+                createProjectCard(
+                    project
+                )
+        ).join("");
+
+}
+
+
+/* =====================================================
+   PROJECT CARD
+===================================================== */
+
+function createProjectCard(
+    project
+) {
+
+    let actionButton = "";
+
+
+    /* --------------------------------
+       OPEN PROJECT
+    -------------------------------- */
+
+    if (
+        project.status === "open"
+    ) {
+
+        /* User's own project */
+
+        if (
+            Number(project.client_id) ===
+            Number(user.user_id)
+        ) {
+
+            actionButton = `
+
+                <button
+                    class="btn btn-disabled"
+                    disabled>
+
+                    Your Project
+
+                </button>
+
+            `;
+
+        }
+
+        /* Freelancer */
+
+        else if (
+            user.role === "freelancer"
+        ) {
+
+            actionButton = `
+
+                <button
+                    class="btn btn-primary"
+                    onclick="
+                        openBidModal(
+                            ${project.project_id}
+                        )
+                    ">
+
+                    Place Bid
+
+                </button>
+
+            `;
+
+        }
+
+        /* Client */
+
+      else {
+
+    actionButton = `
+
+        <button
+            class="btn btn-primary"
+            onclick="showClientBidMessage()">
+
+            Open for Bids
+
+        </button>
+
+    `;
+
+}
+
+    }
+
+
+    /* --------------------------------
+       OTHER STATUS
+    -------------------------------- */
+
+    else {
+
+        actionButton = `
+
+            <button
+                class="btn btn-disabled"
+                disabled>
+
+                ${formatStatus(
+                    project.status
+                )}
+
+            </button>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div
+            class="project-card"
+            data-project-id="${project.project_id}">
+
+
+            <div class="project-header">
+
+                <h2 class="project-title">
+
+                    ${escapeHTML(
+                        project.title
+                    )}
+
+                </h2>
+
+
+                <span
+                    class="
+                        status
+                        status-${project.status}
+                    ">
+
+                    ${formatStatus(
+                        project.status
+                    )}
+
+                </span>
+
+            </div>
+
+
+            <span class="category">
+
+                ${escapeHTML(
+                    project.category_name ||
+                    "General"
+                )}
+
+            </span>
+
+
+            <p class="description">
+
+                ${escapeHTML(
+                    project.description ||
+                    "No description available."
+                )}
+
+            </p>
+
+
+            <div class="project-info">
+
+
+                <div class="info-box">
+
+                    <small>
+                        Budget
+                    </small>
+
+                    <strong>
+                        $${Number(
+                            project.budget || 0
+                        ).toFixed(2)}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        Deadline
+                    </small>
+
+                    <strong>
+                        ${formatDate(
+                            project.deadline
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        Client
+                    </small>
+
+                    <strong>
+                        ${escapeHTML(
+                            project.client_name ||
+                            "Unknown"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        Created
+                    </small>
+
+                    <strong>
+                        ${formatDate(
+                            project.created_at
+                        )}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="project-footer">
+
+                <span
+                    style="
+                        color:#888;
+                        font-size:13px;
+                    ">
+
+                    Project #${project.project_id}
+
+                </span>
+
+
+                ${actionButton}
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        applyFilters
+    );
+
+
+/* =====================================================
+   CATEGORY FILTER
+===================================================== */
+
+document
+    .getElementById(
+        "categoryFilter"
+    )
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+/* =====================================================
+   APPLY FILTERS
+===================================================== */
+
+function applyFilters() {
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document
+            .getElementById(
+                "categoryFilter"
+            )
+            .value;
+
+
+    const filtered =
+        allProjects.filter(
+            project => {
+
+                const matchesSearch =
+                    !search ||
+                    String(
+                        project.title || ""
+                    )
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    String(
+                        project.description || ""
+                    )
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesCategory =
+                    !category ||
+                    String(
+                        project.category_id
+                    ) === String(category);
+
+
+                return (
+                    matchesSearch &&
+                    matchesCategory
+                );
+
+            }
+        );
+
+
+    displayProjects(
+        filtered
+    );
+
+}
+
+
+/* =====================================================
+   OPEN BID MODAL
+===================================================== */
+
+function openBidModal(
+    projectId
+) {
+
+    const project =
+        allProjects.find(
+            p =>
+                Number(
+                    p.project_id
+                ) === Number(projectId)
+        );
+
+
+    if (!project) {
+
+        showToast(
+            "Project not found."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "bidProjectId"
+        )
+        .value =
+        project.project_id;
+
+
+    document
+        .getElementById(
+            "selectedProjectInfo"
+        )
+        .innerHTML = `
+
+            <strong
+                style="
+                    color:#312e81;
+                    font-size:18px;
+                ">
+
+                ${escapeHTML(
+                    project.title
+                )}
+
+            </strong>
+
+
+            <div
+                style="
+                    margin-top:8px;
+                    color:#666;
+                ">
+
+                Budget:
+                <strong>
+                    $${Number(
+                        project.budget || 0
+                    ).toFixed(2)}
+                </strong>
+
+                &nbsp; | &nbsp;
+
+                Deadline:
+                <strong>
+                    ${formatDate(
+                        project.deadline
+                    )}
+                </strong>
+
+            </div>
+
+        `;
+
+
+    document
+        .getElementById(
+            "bidAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "bidProposal"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "bidModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   CLOSE BID MODAL
+===================================================== */
+
+function closeBidModal() {
+
+    document
+        .getElementById(
+            "bidModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   SUBMIT BID
+===================================================== */
+
+document
+    .getElementById(
+        "bidForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            if (
+                !user ||
+                user.role !== "freelancer"
+            ) {
+
+                showToast(
+                    "Only freelancers can place bids."
+                );
+
+                return;
+
+            }
+
+
+            const projectId =
+                document
+                    .getElementById(
+                        "bidProjectId"
+                    )
+                    .value;
+
+
+            const bidAmount =
+                document
+                    .getElementById(
+                        "bidAmount"
+                    )
+                    .value;
+
+
+            const proposal =
+                document
+                    .getElementById(
+                        "bidProposal"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                !projectId ||
+                !bidAmount ||
+                !proposal
+            ) {
+
+                showToast(
+                    "Please fill all fields."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/bids",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    project_id:
+                                        Number(
+                                            projectId
+                                        ),
+
+                                    freelancer_id:
+                                        Number(
+                                            user.user_id
+                                        ),
+
+                                    bid_amount:
+                                        Number(
+                                            bidAmount
+                                        ),
+
+                                    proposal
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    showToast(
+                        data.message ||
+                        "Failed to place bid."
+                    );
+
+                    return;
+
+                }
+
+
+                showToast(
+                    "Bid placed successfully!"
+                );
+
+
+                closeBidModal();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Bid Error:",
+                    error
+                );
+
+
+                showToast(
+                    "Server error. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   MODAL OUTSIDE CLICK
+===================================================== */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "bidModal"
+            );
+
+
+        if (
+            event.target === modal
+        ) {
+
+            closeBidModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+    date
+) {
+
+    if (!date) {
+        return "N/A";
+    }
+
+
+    const d =
+        new Date(date);
+
+
+    if (
+        isNaN(
+            d.getTime()
+        )
+    ) {
+
+        return date;
+
+    }
+
+
+    return d.toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function formatStatus(
+    status
+) {
+
+    if (!status) {
+        return "";
+    }
+
+
+    return status
+        .replace(
+            "_",
+            " "
+        )
+        .replace(
+            /\b\w/g,
+            char =>
+                char.toUpperCase()
+        );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function showToast(
+    message
+) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3000
+        );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+loadProjects();
+function showClientBidMessage() {
+
+    showToast(
+        "Only freelancers can place bids on projects."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

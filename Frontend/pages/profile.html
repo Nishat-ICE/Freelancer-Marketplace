@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | Freelancer Marketplace</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+
+    <style>
+
+        /* ========================================
+           PAGE
+        ======================================== */
+
+        .profile-page {
+
+            padding: 35px;
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .profile-header {
+
+            margin-bottom: 25px;
+
+        }
+
+        .profile-header h2 {
+
+            margin: 0 0 6px;
+
+            color: #211b45;
+
+            font-size: 30px;
+
+        }
+
+        .profile-header p {
+
+            margin: 0;
+
+            color: #888;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ========================================
+           PROFILE GRID
+        ======================================== */
+
+        .profile-grid {
+
+            display: grid;
+
+            grid-template-columns: 300px 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        /* ========================================
+           PROFILE CARD
+        ======================================== */
+
+        .profile-card {
+
+            background: white;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 8px 25px rgba(71,55,120,.07);
+
+        }
+
+
+        .profile-left {
+
+            text-align: center;
+
+        }
+
+
+        .profile-avatar {
+
+            width: 100px;
+
+            height: 100px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 38px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+        }
+
+
+        .profile-name {
+
+            margin: 0 0 5px;
+
+            color: #29224e;
+
+            font-size: 22px;
+
+        }
+
+
+        .profile-role {
+
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            background: #f0edff;
+
+            color: #6846d7;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            text-transform: capitalize;
+
+        }
+
+
+        .profile-email {
+
+            margin-top: 15px;
+
+            color: #888;
+
+            font-size: 13px;
+
+            word-break: break-word;
+
+        }
+
+
+        /* ========================================
+           FORM
+        ======================================== */
+
+        .profile-card h3 {
+
+            margin: 0 0 22px;
+
+            color: #29224e;
+
+            font-size: 20px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #342d55;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 12px 14px;
+
+            border: 1px solid #e2dff0;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: #684edb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(104,78,219,.10);
+
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        .save-profile-btn {
+
+            border: none;
+
+            padding: 12px 24px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .save-profile-btn:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .profile-message {
+
+            margin-top: 13px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .profile-message.success {
+
+            color: #16834b;
+
+        }
+
+
+        .profile-message.error {
+
+            color: #c03939;
+
+        }
+
+
+        /* ========================================
+           INFO
+        ======================================== */
+
+        .profile-info {
+
+            margin-top: 22px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+        }
+
+
+        .info-box {
+
+            background: #f8f7fd;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .info-box span {
+
+            display: block;
+
+            color: #888;
+
+            font-size: 11px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .info-box strong {
+
+            color: #29224e;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ========================================
+           LOADING
+        ======================================== */
+
+        .profile-loading {
+
+            padding: 60px;
+
+            text-align: center;
+
+            color: #777;
+
+        }
+
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media(max-width: 850px) {
+
+            .profile-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .profile-page {
+
+                padding: 20px;
+
+            }
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .profile-info {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+/* ========================================
+   FIX PROFILE PAGE POSITION
+======================================== */
+
+.main-content {
+    margin-left: 335px !important;
+    width: calc(100% - 335px) !important;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.profile-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 35px 40px;
+    box-sizing: border-box;
+}
+
+.profile-grid {
+    width: 100%;
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     SIDEBAR
+======================================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <strong>Freelancer</strong>
+
+        <span>Marketplace</span>
+
+    </div>
+
+
+    <div class="sidebar-nav">
+
+
+        <a href="dashboard.html"
+           class="nav-item">
+
+            🏠
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="projects.html"
+           class="nav-item">
+
+            📁
+
+            <span>Browse Projects</span>
+
+        </a>
+
+
+        <a href="my-projects.html"
+           class="nav-item client-only">
+
+            📂
+
+            <span>My Projects</span>
+
+        </a>
+
+
+        <a href="bids.html"
+           class="nav-item freelancer-only">
+
+            📋
+
+            <span>My Bids</span>
+
+        </a>
+
+
+        <a href="messages.html"
+           class="nav-item">
+
+            💬
+
+            <span>Messages</span>
+
+        </a>
+
+
+        <a href="notifications.html"
+           class="nav-item">
+
+            🔔
+
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="profile.html"
+           class="nav-item active">
+
+            👤
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="payment.html"
+           class="nav-item">
+
+            💳
+
+            <span>Payment</span>
+
+        </a>
+<a href="contracts.html" class="nav-item">
+    📄 Contracts
+</a>
+<a href="reviews.html" class="nav-item">
+    ⭐ Reviews
+</a>
+        <a href="#"
+           class="nav-item"
+           onclick="logoutUser()">
+
+            🚪
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<div class="main-content">
+
+    <div class="profile-page">
+
+
+        <div class="profile-header">
+
+            <h2>My Profile</h2>
+
+            <p>
+                Manage your personal and professional information
+            </p>
+
+        </div>
+
+
+        <div id="profileLoading"
+             class="profile-loading">
+
+            Loading profile...
+
+        </div>
+
+
+        <div id="profileContent"
+             class="profile-grid"
+             style="display:none;">
+
+
+            <!-- LEFT -->
+
+            <div class="profile-card profile-left">
+
+                <div
+                    id="profileAvatar"
+                    class="profile-avatar">
+
+                    ?
+
+                </div>
+
+
+                <h3
+                    id="profileName"
+                    class="profile-name">
+
+                    --
+
+                </h3>
+
+
+                <span
+                    id="profileRole"
+                    class="profile-role">
+
+                    --
+
+                </span>
+
+
+                <div
+                    id="profileEmail"
+                    class="profile-email">
+
+                    --
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <div class="info-box">
+
+                        <span>
+                            Experience
+                        </span>
+
+                        <strong
+                            id="profileExperience">
+
+                            --
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Rating
+                        </span>
+
+                        <strong
+                            id="profileRating">
+
+                            --
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="profile-card">
+
+                <h3>
+                    Edit Profile
+                </h3>
+
+
+                <form id="profileForm">
+
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="skills">
+                                Skills
+                            </label>
+
+                            <input
+                                type="text"
+                                id="skills"
+                                placeholder="HTML, CSS, JavaScript">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="experience">
+                                Experience (Years)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="experience"
+                                min="0"
+                                placeholder="2">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="bio">
+                            Bio
+                        </label>
+
+                        <textarea
+                            id="bio"
+                            placeholder="Tell clients about yourself..."></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="saveProfileBtn"
+                        class="save-profile-btn">
+
+                        Save Changes
+
+                    </button>
+
+
+                    <div
+                        id="profileMessage"
+                        class="profile-message">
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+
+// ========================================
+// CURRENT USER
+// ========================================
+
+const user = getCurrentUser();
+
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+// ========================================
+// ROLE SIDEBAR
+// ========================================
+
+const clientItems =
+    document.querySelectorAll(".client-only");
+
+const freelancerItems =
+    document.querySelectorAll(".freelancer-only");
+
+
+if (user.role === "client") {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+} else {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+}
+
+
+// ========================================
+// LOAD PROFILE
+// ========================================
+
+async function loadProfile() {
+
+    try {
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/profile/${user.user_id}`
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load profile."
+            );
+
+        }
+
+
+        const profile =
+            data.profile;
+
+
+        // ========================================
+        // DISPLAY
+        // ========================================
+
+        document.getElementById(
+            "profileAvatar"
+        ).textContent =
+            getInitial(profile.name);
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent =
+            profile.name || "User";
+
+
+        document.getElementById(
+            "profileRole"
+        ).textContent =
+            profile.role || "User";
+
+
+        document.getElementById(
+            "profileEmail"
+        ).textContent =
+            profile.email || "";
+
+
+        document.getElementById(
+            "profileExperience"
+        ).textContent =
+            profile.experience !== null &&
+            profile.experience !== undefined
+                ? profile.experience + " years"
+                : "Not added";
+
+
+        document.getElementById(
+            "profileRating"
+        ).textContent =
+            profile.rating !== null &&
+            profile.rating !== undefined
+                ? "★ " + profile.rating
+                : "0";
+
+
+        // ========================================
+        // FORM
+        // ========================================
+
+        document.getElementById(
+            "name"
+        ).value =
+            profile.name || "";
+
+
+        document.getElementById(
+            "skills"
+        ).value =
+            profile.skills || "";
+
+
+        document.getElementById(
+            "experience"
+        ).value =
+            profile.experience ?? "";
+
+
+        document.getElementById(
+            "bio"
+        ).value =
+            profile.bio || "";
+
+
+        document.getElementById(
+            "profileLoading"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "profileContent"
+        ).style.display =
+            "grid";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "profileLoading"
+        ).innerHTML = `
+
+            <div style="color:#c03939;">
+
+                ⚠️
+                ${escapeHtml(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// SAVE PROFILE
+// ========================================
+
+document
+    .getElementById("profileForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "name"
+                ).value.trim();
+
+
+            const skills =
+                document.getElementById(
+                    "skills"
+                ).value.trim();
+
+
+            const experience =
+                document.getElementById(
+                    "experience"
+                ).value;
+
+
+            const bio =
+                document.getElementById(
+                    "bio"
+                ).value.trim();
+
+
+            const button =
+                document.getElementById(
+                    "saveProfileBtn"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "profileMessage"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Saving...";
+
+
+            message.textContent = "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+
+                        `http://localhost:5000/api/profile/${user.user_id}`,
+
+                        {
+
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                name: name,
+
+                                skills: skills,
+
+                                experience:
+                                    experience
+                                        ? Number(experience)
+                                        : null,
+
+                                bio: bio
+
+                            })
+
+                        }
+
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to update profile."
+                    );
+
+                }
+
+
+                message.className =
+                    "profile-message success";
+
+
+                message.textContent =
+                    "Profile updated successfully!";
+
+
+                // Update local user name
+                user.name = name;
+
+                localStorage.setItem(
+                    "currentUser",
+                    JSON.stringify(user)
+                );
+
+
+                await loadProfile();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                message.className =
+                    "profile-message error";
+
+
+                message.textContent =
+                    error.message;
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Save Changes";
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// HELPERS
+// ========================================
+
+function getInitial(name) {
+
+    if (!name) {
+
+        return "?";
+
+    }
+
+    return name
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+// ========================================
+// START
+// ========================================
+
+loadProfile();
+
+</script>
+
+
+</body>
+
+</html>

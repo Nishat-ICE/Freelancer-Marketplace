@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Messages | Freelancer Marketplace</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+
+    <style>
+
+        /* ========================================
+           PAGE
+        ======================================== */
+
+        .messages-page {
+
+            padding: 30px 35px;
+
+            height: 100vh;
+
+            box-sizing: border-box;
+
+            overflow: hidden;
+
+        }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .messages-header {
+
+            margin-bottom: 20px;
+
+        }
+
+        .messages-header h2 {
+
+            margin: 0 0 5px;
+
+            color: #211b45;
+
+            font-size: 30px;
+
+        }
+
+        .messages-header p {
+
+            margin: 0;
+
+            color: #888;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ========================================
+           CHAT AREA
+        ======================================== */
+
+        .messages-wrapper {
+
+            display: grid;
+
+            grid-template-columns: 280px 1fr;
+
+            height: calc(100vh - 150px);
+
+            min-height: 500px;
+
+            background: white;
+
+            border: 1px solid #eeeaf9;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(71,55,120,.07);
+
+        }
+
+
+        /* ========================================
+           CONTACTS
+        ======================================== */
+
+        .contacts {
+
+            border-right: 1px solid #eeeaf9;
+
+            background: #faf9ff;
+
+            overflow-y: auto;
+
+        }
+
+
+        .contacts-title {
+
+            padding: 20px;
+
+            border-bottom: 1px solid #eeeaf9;
+
+            color: #29224e;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+        }
+
+
+        .contact-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px 18px;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid #f0edf8;
+
+            transition: .2s;
+
+        }
+
+
+        .contact-item:hover {
+
+            background: #f1eeff;
+
+        }
+
+
+        .contact-item.active {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eeeaff,
+                    #f5f2ff
+                );
+
+        }
+
+
+        .contact-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+        }
+
+
+        .contact-info {
+
+            min-width: 0;
+
+        }
+
+
+        .contact-info strong {
+
+            display: block;
+
+            color: #29224e;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .contact-info span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #999;
+
+            font-size: 11px;
+
+            text-transform: capitalize;
+
+        }
+
+
+        /* ========================================
+           CHAT
+        ======================================== */
+
+        .chat-area {
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+
+        }
+
+
+        .chat-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 18px 22px;
+
+            border-bottom: 1px solid #eeeaf9;
+
+            min-height: 72px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .chat-header-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+        }
+
+
+        .chat-header-info strong {
+
+            display: block;
+
+            color: #29224e;
+
+            font-size: 15px;
+
+        }
+
+
+        .chat-header-info span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #999;
+
+            font-size: 11px;
+
+            text-transform: capitalize;
+
+        }
+
+
+        /* ========================================
+           CHAT MESSAGES
+        ======================================== */
+
+        .chat-messages {
+
+            flex: 1;
+
+            padding: 22px;
+
+            overflow-y: auto;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #faf9ff,
+                    #f7f6ff
+                );
+
+        }
+
+
+        .empty-chat {
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: #888;
+
+        }
+
+
+        .empty-chat-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .empty-chat h3 {
+
+            margin: 0 0 7px;
+
+            color: #29224e;
+
+        }
+
+
+        .empty-chat p {
+
+            margin: 0;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ========================================
+           MESSAGE
+        ======================================== */
+
+        .message-row {
+
+            display: flex;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .message-row.mine {
+
+            justify-content: flex-end;
+
+        }
+
+
+        .message-row.theirs {
+
+            justify-content: flex-start;
+
+        }
+
+
+        .message-bubble {
+
+            max-width: 65%;
+
+            padding: 11px 14px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .message-row.mine .message-bubble {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+            color: white;
+
+            border-bottom-right-radius: 4px;
+
+        }
+
+
+        .message-row.theirs .message-bubble {
+
+            background: white;
+
+            color: #444;
+
+            border: 1px solid #eeeaf9;
+
+            border-bottom-left-radius: 4px;
+
+        }
+
+
+        .message-time {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 10px;
+
+            opacity: .65;
+
+        }
+
+
+        /* ========================================
+           INPUT
+        ======================================== */
+
+        .chat-input-area {
+
+            display: flex;
+
+            gap: 10px;
+
+            padding: 15px;
+
+            border-top: 1px solid #eeeaf9;
+
+            background: white;
+
+        }
+
+
+        .chat-input {
+
+            flex: 1;
+
+            padding: 12px 15px;
+
+            border: 1px solid #e2dff0;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            resize: none;
+
+        }
+
+
+        .chat-input:focus {
+
+            border-color: #684edb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(104,78,219,.10);
+
+        }
+
+
+        .send-btn {
+
+            width: 90px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6254e7,
+                    #754bd9
+                );
+
+            color: white;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .send-btn:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* ========================================
+           MESSAGE
+        ======================================== */
+
+        .send-message {
+
+            margin-top: 5px;
+
+            font-size: 12px;
+
+        }
+
+
+        .send-message.success {
+
+            color: #16834b;
+
+        }
+
+
+        .send-message.error {
+
+            color: #c03939;
+
+        }
+
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media(max-width: 800px) {
+
+            .messages-page {
+
+                padding: 20px;
+
+            }
+
+            .messages-wrapper {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .contacts {
+
+                display: none;
+
+            }
+
+            .message-bubble {
+
+                max-width: 80%;
+
+            }
+
+        }
+        /* ========================================
+   FIX MESSAGE CHAT HEIGHT
+======================================== */
+
+.messages-page {
+    height: auto !important;
+    min-height: 100vh;
+    padding-bottom: 30px;
+}
+
+.messages-wrapper {
+    height: 620px !important;
+    min-height: 0 !important;
+}
+
+.chat-area {
+    min-height: 0;
+}
+
+.chat-messages {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.chat-input-area {
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.chat-input {
+    min-height: 45px;
+    max-height: 90px;
+    box-sizing: border-box;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     SIDEBAR
+======================================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <strong>Freelancer</strong>
+
+        <span>Marketplace</span>
+
+    </div>
+
+
+    <div class="sidebar-nav">
+
+
+        <a href="dashboard.html"
+           class="nav-item">
+
+            🏠
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="projects.html"
+           class="nav-item">
+
+            📁
+
+            <span>Browse Projects</span>
+
+        </a>
+
+
+        <a href="my-projects.html"
+           class="nav-item client-only">
+
+            📂
+
+            <span>My Projects</span>
+
+        </a>
+
+
+        <a href="bids.html"
+           class="nav-item freelancer-only">
+
+            📋
+
+            <span>My Bids</span>
+
+        </a>
+
+
+        <a href="messages.html"
+           class="nav-item active">
+
+            💬
+
+            <span>Messages</span>
+
+        </a>
+
+
+        <a href="notifications.html"
+           class="nav-item">
+
+            🔔
+
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="profile.html"
+           class="nav-item">
+
+            👤
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="payment.html"
+           class="nav-item">
+
+            💳
+
+            <span>Payment</span>
+
+        </a>
+
+<a href="contracts.html" class="nav-item">
+    📄 Contracts
+</a>
+<a href="reviews.html" class="nav-item">
+    ⭐ Reviews
+</a>
+        <a href="#"
+           class="nav-item"
+           onclick="logoutUser()">
+
+            🚪
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<div class="main-content">
+
+    <div class="messages-page">
+
+
+        <div class="messages-header">
+
+            <h2>Messages</h2>
+
+            <p>
+                Communicate with clients and freelancers
+            </p>
+
+        </div>
+
+
+
+        <div class="messages-wrapper">
+
+
+            <!-- CONTACTS -->
+
+            <div class="contacts">
+
+                <div class="contacts-title">
+
+                    Conversations
+
+                </div>
+
+
+                <div id="contactsList">
+
+                    Loading contacts...
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CHAT -->
+
+            <div class="chat-area">
+
+
+                <div
+                    id="chatHeader"
+                    class="chat-header">
+
+                    <div class="chat-header-info">
+
+                        <strong>
+                            Select a contact
+                        </strong>
+
+                        <span>
+                            Choose someone to start chatting
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="chatMessages"
+                    class="chat-messages">
+
+                    <div class="empty-chat">
+
+                        <div class="empty-chat-icon">
+                            💬
+                        </div>
+
+                        <h3>
+                            Start a Conversation
+                        </h3>
+
+                        <p>
+                            Select a client or freelancer
+                            from the left.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INPUT -->
+
+                <form
+                    id="messageForm"
+                    class="chat-input-area"
+                    style="display:none;">
+
+                    <textarea
+                        id="messageInput"
+                        class="chat-input"
+                        rows="2"
+                        placeholder="Type your message..."
+                        required></textarea>
+
+
+                    <button
+                        type="submit"
+                        class="send-btn"
+                        id="sendBtn">
+
+                        Send
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+
+// ========================================
+// USER
+// ========================================
+
+const user = getCurrentUser();
+
+
+if (!user) {
+
+    window.location.href = "login.html";
+
+}
+
+
+// ========================================
+// ROLE SIDEBAR
+// ========================================
+
+const clientItems =
+    document.querySelectorAll(".client-only");
+
+const freelancerItems =
+    document.querySelectorAll(".freelancer-only");
+
+
+if (user.role === "client") {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+} else {
+
+    clientItems.forEach(item => {
+
+        item.style.display = "none";
+
+    });
+
+    freelancerItems.forEach(item => {
+
+        item.style.display = "flex";
+
+    });
+
+}
+
+
+// ========================================
+// VARIABLES
+// ========================================
+
+let selectedUser = null;
+
+
+// ========================================
+// LOAD CONTACTS
+// ========================================
+
+async function loadContacts() {
+
+    const container =
+        document.getElementById("contactsList");
+
+
+    try {
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/messages/users/${user.user_id}`
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load contacts."
+            );
+
+        }
+
+
+        if (!data.users.length) {
+
+            container.innerHTML = `
+
+                <div style="
+                    padding:20px;
+                    color:#888;
+                    font-size:13px;
+                ">
+
+                    No contacts available.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            data.users.map(contact => `
+
+                <div
+                    class="contact-item"
+                    onclick="
+                        selectContact(
+                            ${contact.user_id}
+                        )
+                    "
+                    id="contact-${contact.user_id}">
+
+                    <div class="contact-avatar">
+
+                        ${getInitial(
+                            contact.name
+                        )}
+
+                    </div>
+
+
+                    <div class="contact-info">
+
+                        <strong>
+
+                            ${escapeHtml(
+                                contact.name
+                            )}
+
+                        </strong>
+
+                        <span>
+
+                            ${escapeHtml(
+                                contact.role
+                            )}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+
+            <div style="
+                padding:20px;
+                color:#c03939;
+                font-size:13px;
+            ">
+
+                ${escapeHtml(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// SELECT CONTACT
+// ========================================
+
+async function selectContact(userId) {
+
+    selectedUser =
+        Number(userId);
+
+
+    document
+        .querySelectorAll(".contact-item")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    const selectedElement =
+        document.getElementById(
+            `contact-${userId}`
+        );
+
+
+    if (selectedElement) {
+
+        selectedElement.classList.add("active");
+
+    }
+
+
+    const contact =
+        await getContact(userId);
+
+
+    if (!contact) {
+
+        return;
+
+    }
+
+
+    // Header
+
+    document.getElementById(
+        "chatHeader"
+    ).innerHTML = `
+
+        <div class="chat-header-avatar">
+
+            ${getInitial(
+                contact.name
+            )}
+
+        </div>
+
+
+        <div class="chat-header-info">
+
+            <strong>
+
+                ${escapeHtml(
+                    contact.name
+                )}
+
+            </strong>
+
+            <span>
+
+                ${escapeHtml(
+                    contact.role
+                )}
+
+            </span>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "messageForm"
+    ).style.display = "flex";
+
+
+    await loadConversation();
+
+}
+
+
+// ========================================
+// GET CONTACT
+// ========================================
+
+async function getContact(userId) {
+
+    try {
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/messages/users/${user.user_id}`
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        return data.users.find(
+            u =>
+                Number(u.user_id) ===
+                Number(userId)
+        );
+
+    } catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+// ========================================
+// LOAD CONVERSATION
+// ========================================
+
+async function loadConversation() {
+
+    if (!selectedUser) {
+
+        return;
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    try {
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/messages/conversation/${user.user_id}/${selectedUser}`
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.message ||
+                "Failed to load messages."
+            );
+
+        }
+
+
+        const messages =
+            data.messages || [];
+
+
+        if (messages.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="empty-chat">
+
+                    <div class="empty-chat-icon">
+                        👋
+                    </div>
+
+                    <h3>
+                        No Messages Yet
+                    </h3>
+
+                    <p>
+                        Send the first message
+                        to start the conversation.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            messages.map(message => {
+
+                const mine =
+                    Number(message.sender_id) ===
+                    Number(user.user_id);
+
+
+                return `
+
+                    <div class="
+                        message-row
+                        ${mine ? "mine" : "theirs"}
+                    ">
+
+                        <div class="message-bubble">
+
+                            ${escapeHtml(
+                                message.message_text
+                            )}
+
+                            <span class="message-time">
+
+                                ${formatDateTime(
+                                    message.sent_time
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+
+        // Scroll bottom
+
+        container.scrollTop =
+            container.scrollHeight;
+
+
+    } catch (error) {
+
+        container.innerHTML = `
+
+            <div class="empty-chat">
+
+                <div class="empty-chat-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Failed to Load Messages
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// SEND MESSAGE
+// ========================================
+
+document
+    .getElementById("messageForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            if (!selectedUser) {
+
+                return;
+
+            }
+
+
+            const input =
+                document.getElementById(
+                    "messageInput"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "sendBtn"
+                );
+
+
+            const text =
+                input.value.trim();
+
+
+            if (!text) {
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Sending...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/messages",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                sender_id:
+                                    user.user_id,
+
+                                receiver_id:
+                                    selectedUser,
+
+                                project_id:
+                                    null,
+
+                                message_text:
+                                    text
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to send message."
+                    );
+
+                }
+
+
+                input.value = "";
+
+
+                await loadConversation();
+
+
+            } catch (error) {
+
+                alert(
+                    error.message
+                );
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Send";
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// ENTER KEY
+// ========================================
+
+document
+    .getElementById("messageInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                document
+                    .getElementById("messageForm")
+                    .requestSubmit();
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// INITIAL
+// ========================================
+
+loadContacts();
+
+
+// ========================================
+// HELPERS
+// ========================================
+
+function getInitial(name) {
+
+    if (!name) {
+
+        return "?";
+
+    }
+
+    return name
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+function formatDateTime(dateValue) {
+
+    if (!dateValue) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (isNaN(date.getTime())) {
+
+        return "";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-US",
+        {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

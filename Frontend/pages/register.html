@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Freelancer Marketplace</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-box">
+
+            <!-- ================= LEFT SIDE ================= -->
+            <div class="brand-section">
+
+                <div class="brand-icon">
+                    💼
+                </div>
+
+                <h1>
+                    Freelancer<br>
+                    Marketplace
+                </h1>
+
+                <div class="brand-tagline">
+                    WORK&nbsp;&nbsp;•&nbsp;&nbsp; CONNECT&nbsp;&nbsp;•&nbsp;&nbsp; GROW
+                </div>
+
+                <div class="brand-line"></div>
+
+                <h2>
+                    Turn your skills into<br>
+                    opportunities
+                </h2>
+
+                <p>
+                    Join a community of talented<br>
+                    freelancers and clients, and bring<br>
+                    your ideas to life.
+                </p>
+
+                <div class="brand-quote">
+                    “Better skills. Brighter opportunities.”
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+            <div class="form-section">
+
+                <h2 class="form-title">
+                    Create an Account
+                </h2>
+
+                <p class="form-subtitle">
+                    Join Freelancer Marketplace and start your journey today!
+                </p>
+
+
+                <form id="registerForm">
+
+                    <!-- Full Name -->
+                    <div class="input-box">
+
+                        <span class="input-icon">♙</span>
+
+                        <div class="input-content">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="input-box">
+
+                        <span class="input-icon">✉</span>
+
+                        <div class="input-content">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email address"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="input-box">
+
+                        <span class="input-icon">🔒</span>
+
+                        <div class="input-content">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                        >
+                            ◉
+                        </button>
+
+                    </div>
+
+
+                    <!-- Account Type -->
+                    <div class="input-box">
+
+                        <span class="input-icon">♙</span>
+
+                        <div class="input-content">
+
+                            <label for="role">
+                                Account Type
+                            </label>
+
+                            <select id="role" required>
+
+                                <option value="">
+                                    Select account type
+                                </option>
+
+                                <option value="freelancer">
+                                    Freelancer
+                                </option>
+
+                                <option value="client">
+                                    Client
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Register Button -->
+                    <button
+                        type="submit"
+                        class="register-btn"
+                    >
+                        Create Account
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <!-- OR -->
+                <div class="divider">
+
+                    <span></span>
+
+                    <p>OR</p>
+
+                    <span></span>
+
+                </div>
+
+
+                <!-- Login -->
+                <p class="login-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login here
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main JavaScript -->
+    <script src="../js/script.js"></script>
+
+
+    <!-- Register JavaScript -->
+    <script>
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const name =
+                    document.getElementById("name").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const role =
+                    document.getElementById("role").value;
+
+                registerUser(
+                    name,
+                    email,
+                    password,
+                    role
+                );
+
+            });
+
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+            } else {
+
+                password.type = "password";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

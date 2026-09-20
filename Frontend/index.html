@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Freelancer Marketplace</title>
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #ffffff;
+            color: #172033;
+
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border-bottom: 1px solid #eeeeF5;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 20px;
+            font-weight: 900;
+
+            transform: skew(-8deg);
+        }
+
+        .brand-name {
+            font-size: 23px;
+            font-weight: 800;
+
+            letter-spacing: -0.6px;
+
+            color: #1d2535;
+        }
+
+        .brand-name span {
+            color: #5146e5;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .features-link {
+            color: #273247;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            margin-right: 15px;
+
+            transition: 0.2s;
+        }
+
+        .features-link:hover {
+            color: #5146e5;
+        }
+
+        .login-btn {
+            padding: 10px 23px;
+
+            border: 2px solid #5146e5;
+
+            border-radius: 11px;
+
+            color: #5146e5;
+
+            font-weight: 700;
+
+            background: white;
+
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #5146e5;
+            color: white;
+        }
+
+        .register-btn {
+            padding: 12px 25px;
+
+            border-radius: 11px;
+
+            color: white;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146e5,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 9px 22px
+                rgba(81, 70, 229, 0.22);
+
+            transition: 0.2s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 28px
+                rgba(81, 70, 229, 0.28);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            width: 100%;
+
+            min-height: 535px;
+
+            position: relative;
+
+            padding:
+                80px
+                7%
+                75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 65px;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(194, 188, 255, 0.55),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f8f8ff 0%,
+                    #f0f0ff 50%,
+                    #e9e8ff 100%
+                );
+        }
+
+
+        /* Decorative circles */
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 310px;
+            height: 310px;
+
+            right: -120px;
+            top: -160px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(181, 179, 255, 0.28);
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            left: -100px;
+            bottom: -160px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(124, 58, 237, 0.12);
+        }
+
+
+        /* =====================================================
+           HERO LEFT
+        ===================================================== */
+
+        .hero-left {
+            width: 54%;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            margin-bottom: 22px;
+
+            color: #69738a;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+        }
+
+        .eyebrow-line {
+            width: 32px;
+            height: 2px;
+
+            background: #5b4be7;
+        }
+
+        .hero-title {
+            max-width: 650px;
+
+            font-size:
+                clamp(42px, 5vw, 65px);
+
+            line-height: 1.06;
+
+            letter-spacing: -2.5px;
+
+            color: #121a2b;
+
+            margin-bottom: 25px;
+        }
+
+        .hero-title .highlight {
+            color: #5745e8;
+        }
+
+        .hero-description {
+            max-width: 620px;
+
+            font-size: 17px;
+
+            line-height: 1.75;
+
+            color: #647087;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           HERO BUTTONS
+        ===================================================== */
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 35px;
+        }
+
+        .get-started {
+            padding: 14px 26px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5146e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 22px
+                rgba(81, 70, 229, 0.24);
+
+            transition: 0.2s;
+        }
+
+        .get-started:hover {
+            transform: translateY(-2px);
+        }
+
+        .get-started .arrow {
+            font-size: 20px;
+        }
+
+        .explore-btn {
+            padding: 13px 27px;
+
+            display: inline-flex;
+            align-items: center;
+
+            border-radius: 11px;
+
+            border: 2px solid #d6d2ff;
+
+            color: #5146e5;
+
+            background: white;
+
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        .explore-btn:hover {
+            background: #f8f7ff;
+        }
+
+
+        /* =====================================================
+           TRUST ITEMS
+        ===================================================== */
+
+        .trust-row {
+            display: flex;
+            align-items: center;
+
+            gap: 45px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .trust-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: white;
+
+            color: #5146e5;
+
+            font-size: 22px;
+
+            box-shadow:
+                0 5px 16px
+                rgba(80, 70, 229, 0.08);
+        }
+
+        .trust-text strong {
+            display: block;
+
+            font-size: 14px;
+
+            color: #1d2535;
+
+            margin-bottom: 3px;
+        }
+
+        .trust-text span {
+            font-size: 11px;
+
+            color: #778197;
+        }
+
+
+        /* =====================================================
+           HERO RIGHT CARD
+        ===================================================== */
+
+        .hero-right {
+            width: 43%;
+
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .work-card {
+            width: 100%;
+            max-width: 460px;
+
+            padding: 35px;
+
+            border-radius: 24px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            box-shadow:
+                0 25px 60px
+                rgba(63, 55, 150, 0.12);
+
+            position: relative;
+        }
+
+        .work-icon {
+            width: 67px;
+            height: 67px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background: #eeeaff;
+
+            font-size: 31px;
+
+            margin-bottom: 24px;
+        }
+
+        .work-card h2 {
+            font-size: 29px;
+
+            line-height: 1.2;
+
+            color: #182135;
+
+            margin-bottom: 14px;
+        }
+
+        .work-card p {
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            color: #68748a;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+        .stat {
+            padding: 17px 8px;
+
+            text-align: center;
+
+            border-radius: 13px;
+
+            background: #f8f7ff;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 22px;
+
+            color: #5146e5;
+
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            font-size: 11px;
+
+            color: #6c778b;
+        }
+
+
+        /* =====================================================
+           WAVE BETWEEN HERO & FEATURES
+        ===================================================== */
+
+        .wave {
+            width: 100%;
+
+            height: 65px;
+
+            margin-top: -1px;
+
+            background:
+                #ffffff;
+
+            clip-path:
+                ellipse(
+                    75% 65% at 50% 100%
+                );
+        }
+
+
+        /* =====================================================
+           FEATURES SECTION
+        ===================================================== */
+
+        .features {
+            width: 100%;
+
+            padding: 30px 7% 85px;
+
+            background: #ffffff;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin:
+                0 auto
+                45px;
+        }
+
+        .small-label {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-bottom: 12px;
+
+            color: #707b91;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+        }
+
+        .small-label::before,
+        .small-label::after {
+            content: "";
+
+            width: 20px;
+            height: 2px;
+
+            background: #6756ed;
+        }
+
+        .section-heading h2 {
+            font-size: 34px;
+
+            color: #182135;
+
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            font-size: 15px;
+
+            color: #68748a;
+        }
+
+
+        /* =====================================================
+           FEATURE GRID
+        ===================================================== */
+
+        .feature-grid {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .feature-card {
+            min-height: 145px;
+
+            padding: 22px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 18px;
+
+            border-radius: 17px;
+
+            background: #ffffff;
+
+            border: 1px solid #eeeeF6;
+
+            box-shadow:
+                0 8px 30px
+                rgba(46, 51, 93, 0.05);
+
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 16px 35px
+                rgba(81, 70, 229, 0.10);
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: #eeeaff;
+
+            font-size: 26px;
+        }
+
+        .feature-content h3 {
+            font-size: 16px;
+
+            color: #182135;
+
+            margin-bottom: 8px;
+        }
+
+        .feature-content p {
+            font-size: 13px;
+
+            line-height: 1.55;
+
+            color: #6b778c;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta-wrapper {
+            padding: 10px 7% 75px;
+
+            background: white;
+        }
+
+        .cta {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            min-height: 135px;
+
+            padding: 35px 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5645e9,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 18px 45px
+                rgba(81, 70, 229, 0.22);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            left: -80px;
+            bottom: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+        }
+
+        .cta::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -60px;
+            top: -80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.09);
+        }
+
+        .cta-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 29px;
+
+            color: white;
+
+            margin-bottom: 8px;
+        }
+
+        .cta p {
+            font-size: 14px;
+
+            color: rgba(255,255,255,0.85);
+        }
+
+        .cta-button {
+            position: relative;
+            z-index: 2;
+
+            flex-shrink: 0;
+
+            padding: 14px 25px;
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: #5146e5;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            width: 100%;
+
+            padding: 35px 7% 22px;
+
+            background: #101827;
+
+            color: white;
+        }
+
+        .footer-top {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            padding-bottom: 25px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .footer-brand .brand-logo {
+            width: 29px;
+            height: 29px;
+
+            font-size: 16px;
+        }
+
+        .footer-brand span {
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        .footer-brand span span {
+            color: #7060ee;
+        }
+
+        .footer-links {
+            display: flex;
+
+            gap: 28px;
+        }
+
+        .footer-links a {
+            color: #c5ccda;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .socials {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .social {
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #1d2738;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 11px;
+
+            color: #7e899d;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .hero {
+                gap: 40px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .trust-row {
+                gap: 20px;
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .hero {
+                flex-direction: column;
+
+                text-align: center;
+
+                padding:
+                    65px
+                    5%
+                    60px;
+            }
+
+            .hero-left {
+                width: 100%;
+            }
+
+            .hero-right {
+                width: 100%;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .trust-row {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .eyebrow {
+                justify-content: center;
+            }
+
+            .work-card {
+                max-width: 500px;
+            }
+
+            .cta {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .brand-name {
+                font-size: 18px;
+            }
+
+            .brand-logo {
+                width: 30px;
+                height: 30px;
+            }
+
+            .features-link {
+                display: none;
+            }
+
+            .login-btn {
+                padding: 8px 15px;
+            }
+
+            .register-btn {
+                padding: 10px 16px;
+            }
+
+            .hero-title {
+                font-size: 39px;
+
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .trust-row {
+                gap: 15px;
+            }
+
+            .trust-item {
+                width: 45%;
+                justify-content: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .cta-wrapper {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .cta {
+                padding: 35px 25px;
+            }
+
+            .footer {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 8px;
+
+                text-align: center;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .navbar {
+                height: 65px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .register-btn {
+                padding: 9px 12px;
+            }
+
+            .login-btn {
+                padding: 7px 12px;
+            }
+
+            .hero-title {
+                font-size: 34px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .get-started,
+            .explore-btn {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+            .trust-item {
+                width: 100%;
+            }
+
+            .work-card {
+                padding: 25px;
+            }
+
+            .work-card h2 {
+                font-size: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="navbar">
+
+        <a
+            href="/"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+                F
+            </div>
+
+            <div class="brand-name">
+                <span>Freelancer</span> Marketplace
+            </div>
+
+        </a>
+
+
+        <nav class="nav-right">
+
+            <a
+                href="#features"
+                class="features-link"
+            >
+                Features
+            </a>
+
+            <a
+                href="pages/login.html"
+                class="login-btn"
+            >
+                Login
+            </a>
+
+            <a
+                href="pages/register.html"
+                class="register-btn"
+            >
+                Register
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <main>
+
+        <section class="hero">
+
+
+            <!-- LEFT -->
+
+            <div class="hero-left">
+
+                <div class="eyebrow">
+
+                    <span class="eyebrow-line"></span>
+
+                    WORK SMARTER
+
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    Find the right
+
+                    <span class="highlight">
+                        freelancer
+                    </span>
+
+                    for your project.
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Connect with talented freelancers,
+                    post projects, place bids, manage
+                    contracts and collaborate — all in
+                    one powerful marketplace.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="pages/register.html"
+                        class="get-started"
+                    >
+
+                        Get Started
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="pages/login.html"
+                        class="explore-btn"
+                    >
+
+                        Explore Marketplace
+
+                    </a>
+
+                </div>
+
+
+                <!-- TRUST -->
+
+                <div class="trust-row">
+
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+                            🛡️
+                        </div>
+
+                        <div class="trust-text">
+
+                            <strong>
+                                Secure
+                            </strong>
+
+                            <span>
+                                Safe & trusted platform
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+                            ⚡
+                        </div>
+
+                        <div class="trust-text">
+
+                            <strong>
+                                Fast
+                            </strong>
+
+                            <span>
+                                Quick and efficient
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <div class="trust-icon">
+                            👥
+                        </div>
+
+                        <div class="trust-text">
+
+                            <strong>
+                                Global
+                            </strong>
+
+                            <span>
+                                Talents worldwide
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="hero-right">
+
+                <div class="work-card">
+
+                    <div class="work-icon">
+                        💼
+                    </div>
+
+
+                    <h2>
+                        Work. Connect. Grow.
+                    </h2>
+
+
+                    <p>
+
+                        Clients can post projects and
+                        receive bids from freelancers,
+                        while freelancers can showcase
+                        their skills and find exciting
+                        opportunities.
+
+                    </p>
+
+
+                    <div class="stats">
+
+
+                        <div class="stat">
+
+                            <strong>
+                                100+
+                            </strong>
+
+                            <span>
+                                Projects
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <strong>
+                                50+
+                            </strong>
+
+                            <span>
+                                Freelancers
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <strong>
+                                24/7
+                            </strong>
+
+                            <span>
+                                Platform
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- WAVE -->
+
+        <div class="wave"></div>
+
+
+
+        <!-- =================================================
+             FEATURES
+        ================================================= -->
+
+        <section
+            class="features"
+            id="features"
+        >
+
+
+            <div class="section-heading">
+
+                <div class="small-label">
+                    WHY CHOOSE US
+                </div>
+
+                <h2>
+                    Everything You Need
+                </h2>
+
+                <p>
+                    A complete marketplace for
+                    clients and freelancers.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-grid">
+
+
+                <!-- 1 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📋
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Post Projects
+                        </h3>
+
+                        <p>
+                            Clients can create projects,
+                            define budgets and deadlines,
+                            and receive bids from skilled
+                            freelancers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 2 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        💻
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Find Work
+                        </h3>
+
+                        <p>
+                            Freelancers can browse
+                            projects, place bids and
+                            manage their ongoing work.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 3 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🤝
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Manage Contracts
+                        </h3>
+
+                        <p>
+                            Accept bids, create contracts,
+                            complete projects and manage
+                            payments.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 4 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        💬
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Messaging
+                        </h3>
+
+                        <p>
+                            Communicate with clients and
+                            freelancers through the built-in
+                            messaging system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 5 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🔔
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Notifications
+                        </h3>
+
+                        <p>
+                            Stay updated about bids,
+                            messages, contracts and
+                            project activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 6 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⭐
+                    </div>
+
+                    <div class="feature-content">
+
+                        <h3>
+                            Reviews & Ratings
+                        </h3>
+
+                        <p>
+                            Build trust through completed
+                            projects, reviews and
+                            freelancer ratings.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+        ================================================= -->
+
+        <section class="cta-wrapper">
+
+            <div class="cta">
+
+                <div class="cta-text">
+
+                    <h2>
+                        Ready to get started?
+                    </h2>
+
+                    <p>
+                        Join the marketplace and connect
+                        with your next opportunity.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="pages/register.html"
+                    class="cta-button"
+                >
+
+                    Create Account
+                    &nbsp; →
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-top">
+
+
+            <div class="footer-brand">
+
+                <div class="brand-logo">
+                    F
+                </div>
+
+                <span>
+                    <span>Freelancer</span>
+                    Marketplace
+                </span>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="/">
+                    About
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="pages/login.html">
+                    Contact
+                </a>
+
+                <a href="pages/login.html">
+                    Help
+                </a>
+
+            </div>
+
+
+            <div class="socials">
+
+                <div class="social">
+                    GH
+                </div>
+
+                <div class="social">
+                    in
+                </div>
+
+                <div class="social">
+                    X
+                </div>
+
+                <div class="social">
+                    ▶
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Freelancer Marketplace.
+                All rights reserved.
+            </span>
+
+            <span>
+                Work. Connect. Grow.
+            </span>
+
+        </div>
+
+
+    </footer>
+
+
+</body>
+</html>

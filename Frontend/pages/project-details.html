@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Details | Freelancer Marketplace</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .details-page {
+            padding: 35px;
+        }
+
+        .project-details-card,
+        .bid-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #eeeaf9;
+            box-shadow: 0 8px 25px rgba(71, 55, 120, .07);
+            margin-bottom: 25px;
+        }
+
+        .details-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid #eeeaf9;
+        }
+
+        .details-top h2 {
+            margin: 15px 0 0;
+            font-size: 30px;
+            color: #211b45;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: #f0edff;
+            color: #6846d7;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .project-status {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .project-status.open {
+            background: #eafaf1;
+            color: #16834b;
+        }
+
+        .project-status.assigned {
+            background: #fff5df;
+            color: #a86a00;
+        }
+
+        .project-status.in_progress {
+            background: #e9f2ff;
+            color: #2467bd;
+        }
+
+        .project-status.completed {
+            background: #e9f8ef;
+            color: #21894f;
+        }
+
+        .project-status.cancelled {
+            background: #ffeded;
+            color: #c03939;
+        }
+
+        .details-description {
+            padding: 25px 0;
+        }
+
+        .details-description h3 {
+            margin: 0 0 10px;
+            color: #29224e;
+            font-size: 18px;
+        }
+
+        .details-description p {
+            color: #707070;
+            line-height: 1.8;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .details-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .details-info-box {
+            background: #f8f7fd;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .details-info-box span {
+            display: block;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .details-info-box strong {
+            color: #302950;
+            font-size: 16px;
+        }
+
+        .back-project-btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 10px;
+            background: #f0edff;
+            color: #624bd4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .bid-card h2 {
+            margin: 0 0 6px;
+            color: #211b45;
+            font-size: 23px;
+        }
+
+        .bid-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #342d55;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 15px;
+            border: 1px solid #e2dff0;
+            border-radius: 10px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #684edb;
+            box-shadow: 0 0 0 3px rgba(104, 78, 219, .10);
+        }
+
+        .submit-bid-btn {
+            border: none;
+            padding: 13px 24px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6254e7, #754bd9);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-bid-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .bid-message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bid-message.success {
+            color: #16834b;
+        }
+
+        .bid-message.error {
+            color: #c03939;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #777;
+        }
+
+        @media(max-width: 900px) {
+            .details-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .details-page {
+                padding: 20px;
+            }
+
+            .details-top {
+                flex-direction: column;
+            }
+
+            .details-top h2 {
+                font-size: 24px;
+            }
+
+            .details-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-details-card,
+            .bid-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <strong>Freelancer</strong>
+            <span>Marketplace</span>
+        </div>
+
+        <div class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="projects.html" class="nav-item active">
+                📁
+                <span>Browse Projects</span>
+            </a>
+
+            <a href="my-projects.html" class="nav-item client-only">
+                📂
+                <span>My Projects</span>
+            </a>
+
+            <a href="bids.html" class="nav-item freelancer-only">
+                📋
+                <span>My Bids</span>
+            </a>
+
+            <a href="messages.html" class="nav-item">
+                💬
+                <span>Messages</span>
+            </a>
+
+            <a href="notifications.html" class="nav-item">
+                🔔
+                <span>Notifications</span>
+            </a>
+
+            <a href="profile.html" class="nav-item">
+                👤
+                <span>Profile</span>
+            </a>
+
+            <a href="payment.html" class="nav-item">
+                💳
+                <span>Payment</span>
+            </a>
+<a href="contracts.html" class="nav-item">
+    📄 Contracts
+</a>
+<a href="reviews.html" class="nav-item">
+    ⭐ Reviews
+</a>
+            <a href="#" class="nav-item" onclick="logoutUser()">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+        <div class="details-page">
+
+            <a href="projects.html" class="back-project-btn">
+                ← Back to Projects
+            </a>
+
+
+            <!-- PROJECT -->
+
+            <div id="projectContainer">
+
+                <div class="loading">
+                    Loading project...
+                </div>
+
+            </div>
+
+
+            <!-- BID FORM -->
+
+            <div id="bidSection" style="display:none;">
+
+                <div class="bid-card">
+
+                    <h2>Place Your Bid</h2>
+
+                    <p class="bid-subtitle">
+                        Submit your proposal for this project.
+                    </p>
+
+
+                    <form id="bidForm">
+
+                        <div class="form-group">
+
+                            <label for="bidAmount">
+                                Your Bid Amount ($)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bidAmount"
+                                min="1"
+                                step="0.01"
+                                placeholder="e.g. 350"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="proposal">
+                                Your Proposal
+                            </label>
+
+                            <textarea
+                                id="proposal"
+                                rows="6"
+                                placeholder="Write your proposal..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="submit-bid-btn"
+                            id="submitBidBtn">
+
+                            Place Bid
+
+                        </button>
+
+
+                        <div
+                            id="bidMessage"
+                            class="bid-message">
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="../js/script.js"></script>
+
+
+    <script>
+
+        // ========================================
+        // CURRENT USER
+        // ========================================
+
+        const user = getCurrentUser();
+
+        if (!user) {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // ========================================
+        // ROLE BASED SIDEBAR
+        // ========================================
+
+        const clientItems =
+            document.querySelectorAll(".client-only");
+
+        const freelancerItems =
+            document.querySelectorAll(".freelancer-only");
+
+
+        if (user.role === "client") {
+
+            clientItems.forEach(item => {
+                item.style.display = "flex";
+            });
+
+            freelancerItems.forEach(item => {
+                item.style.display = "none";
+            });
+
+        } else {
+
+            clientItems.forEach(item => {
+                item.style.display = "none";
+            });
+
+            freelancerItems.forEach(item => {
+                item.style.display = "flex";
+            });
+
+        }
+
+
+        // ========================================
+        // SELECTED PROJECT
+        // ========================================
+
+        const selectedProjectId =
+            localStorage.getItem("selectedProjectId");
+
+
+        if (!selectedProjectId) {
+
+            window.location.href = "projects.html";
+
+        }
+
+
+        // ========================================
+        // LOAD PROJECT
+        // ========================================
+
+        async function loadProject() {
+
+            const container =
+                document.getElementById("projectContainer");
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/projects"
+                );
+
+
+                const data = await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load project."
+                    );
+
+                }
+
+
+                const project =
+                    data.projects.find(
+                        p =>
+                            String(p.project_id) ===
+                            String(selectedProjectId)
+                    );
+
+
+                if (!project) {
+
+                    throw new Error(
+                        "Project not found."
+                    );
+
+                }
+
+
+                showProject(project);
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                container.innerHTML = `
+
+                    <div class="project-details-card">
+
+                        <h2>Unable to Load Project</h2>
+
+                        <p>${escapeHtml(
+                            error.message
+                        )}</p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // ========================================
+        // SHOW PROJECT
+        // ========================================
+
+        function showProject(project) {
+
+            const container =
+                document.getElementById("projectContainer");
+
+
+            const status =
+                project.status || "open";
+
+
+            container.innerHTML = `
+
+                <div class="project-details-card">
+
+                    <div class="details-top">
+
+                        <div>
+
+                            <span class="project-category">
+
+                                ${escapeHtml(
+                                    project.category_name ||
+                                    "General"
+                                )}
+
+                            </span>
+
+                            <h2>
+
+                                ${escapeHtml(
+                                    project.title
+                                )}
+
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="project-status ${status}">
+
+                            ${status.replace(
+                                "_",
+                                " "
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="details-description">
+
+                        <h3>Project Description</h3>
+
+                        <p>
+
+                            ${escapeHtml(
+                                project.description ||
+                                "No description available."
+                            )}
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="details-info-grid">
+
+                        <div class="details-info-box">
+
+                            <span>Budget</span>
+
+                            <strong>
+                                $${Number(
+                                    project.budget || 0
+                                ).toFixed(2)}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="details-info-box">
+
+                            <span>Deadline</span>
+
+                            <strong>
+                                ${formatDate(
+                                    project.deadline
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="details-info-box">
+
+                            <span>Posted By</span>
+
+                            <strong>
+                                ${escapeHtml(
+                                    project.client_name
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="details-info-box">
+
+                            <span>Status</span>
+
+                            <strong>
+                                ${status.replace(
+                                    "_",
+                                    " "
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            // Show bid form only to freelancer
+            if (
+                user.role === "freelancer" &&
+                status === "open"
+            ) {
+
+                document.getElementById(
+                    "bidSection"
+                ).style.display = "block";
+
+            }
+
+        }
+
+
+        // ========================================
+        // PLACE BID
+        // ========================================
+
+        document.getElementById("bidForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const bidAmount =
+                        document.getElementById(
+                            "bidAmount"
+                        ).value;
+
+
+                    const proposal =
+                        document.getElementById(
+                            "proposal"
+                        ).value.trim();
+
+
+                    const message =
+                        document.getElementById(
+                            "bidMessage"
+                        );
+
+
+                    const button =
+                        document.getElementById(
+                            "submitBidBtn"
+                        );
+
+
+                    if (!bidAmount || !proposal) {
+
+                        message.className =
+                            "bid-message error";
+
+                        message.textContent =
+                            "Please fill in all fields.";
+
+                        return;
+
+                    }
+
+
+                    button.disabled = true;
+
+                    button.textContent =
+                        "Submitting...";
+
+
+                    message.textContent = "";
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "http://localhost:5000/api/bids",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body: JSON.stringify({
+
+                                        project_id:
+                                            Number(
+                                                selectedProjectId
+                                            ),
+
+                                        freelancer_id:
+                                            user.user_id,
+
+                                        bid_amount:
+                                            Number(
+                                                bidAmount
+                                            ),
+
+                                        proposal:
+                                            proposal
+
+                                    })
+
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (!response.ok ||
+                            !data.success) {
+
+                            throw new Error(
+                                data.message ||
+                                "Failed to place bid."
+                            );
+
+                        }
+
+
+                        message.className =
+                            "bid-message success";
+
+                        message.textContent =
+                            "Bid placed successfully!";
+
+
+                        document.getElementById(
+                            "bidForm"
+                        ).reset();
+
+
+                        // Go to My Bids
+                        setTimeout(() => {
+
+                            window.location.href =
+                                "bids.html";
+
+                        }, 1000);
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+
+                        message.className =
+                            "bid-message error";
+
+                        message.textContent =
+                            error.message;
+
+
+                        button.disabled = false;
+
+                        button.textContent =
+                            "Place Bid";
+
+                    }
+
+                }
+            );
+
+
+        // ========================================
+        // DATE
+        // ========================================
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+                return "N/A";
+            }
+
+
+            const date =
+                new Date(dateValue);
+
+
+            if (isNaN(date.getTime())) {
+                return dateValue;
+            }
+
+
+            return date.toLocaleDateString(
+                "en-US",
+                {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        // ========================================
+        // ESCAPE HTML
+        // ========================================
+
+        function escapeHtml(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+                return "";
+            }
+
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // ========================================
+        // START
+        // ========================================
+
+        loadProject();
+
+    </script>
+
+</body>
+
+</html>
