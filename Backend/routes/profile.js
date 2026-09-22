@@ -24,7 +24,8 @@ router.get("/:userId", (req, res) => {
             p.skills,
             p.experience,
             p.rating,
-            p.bio
+            p.bio,
+            p.profile_photo
 
         FROM users u
 
@@ -78,9 +79,14 @@ router.put("/:userId", (req, res) => {
         name,
         skills,
         experience,
-        bio
+        bio,
+        profile_photo
     } = req.body;
 
+
+    // ========================================
+    // VALIDATE NAME
+    // ========================================
 
     if (!name || !name.trim()) {
 
@@ -92,7 +98,28 @@ router.put("/:userId", (req, res) => {
     }
 
 
-    // Update user name
+    // ========================================
+    // VALIDATE PHOTO SIZE
+    // ========================================
+
+    if (
+        profile_photo &&
+        profile_photo.length > 5 * 1024 * 1024
+    ) {
+
+        return res.status(400).json({
+            success: false,
+            message:
+                "Profile photo is too large. Please choose a smaller image."
+        });
+
+    }
+
+
+    // ========================================
+    // UPDATE USER NAME
+    // ========================================
+
     const userSql = `
         UPDATE users
         SET name = ?
@@ -101,22 +128,32 @@ router.put("/:userId", (req, res) => {
 
     db.query(
         userSql,
-        [name.trim(), userId],
+        [
+            name.trim(),
+            userId
+        ],
         (err) => {
 
             if (err) {
 
-                console.error(err);
+                console.error(
+                    "Update User Error:",
+                    err
+                );
 
                 return res.status(500).json({
                     success: false,
-                    message: "Failed to update user."
+                    message:
+                        "Failed to update user."
                 });
 
             }
 
 
-            // Check whether profile exists
+            // ========================================
+            // CHECK IF PROFILE EXISTS
+            // ========================================
+
             const checkSql = `
                 SELECT profile_id
                 FROM profiles
@@ -130,11 +167,15 @@ router.put("/:userId", (req, res) => {
 
                     if (err) {
 
-                        console.error(err);
+                        console.error(
+                            "Check Profile Error:",
+                            err
+                        );
 
                         return res.status(500).json({
                             success: false,
-                            message: "Database error."
+                            message:
+                                "Database error."
                         });
 
                     }
@@ -151,7 +192,8 @@ router.put("/:userId", (req, res) => {
                             SET
                                 skills = ?,
                                 experience = ?,
-                                bio = ?
+                                bio = ?,
+                                profile_photo = ?
                             WHERE user_id = ?
                         `;
 
@@ -159,15 +201,25 @@ router.put("/:userId", (req, res) => {
                             updateSql,
                             [
                                 skills || null,
-                                experience || null,
+
+                                experience !== undefined
+                                    ? experience
+                                    : null,
+
                                 bio || null,
+
+                                profile_photo || null,
+
                                 userId
                             ],
                             (err) => {
 
                                 if (err) {
 
-                                    console.error(err);
+                                    console.error(
+                                        "Update Profile Error:",
+                                        err
+                                    );
 
                                     return res.status(500).json({
                                         success: false,
@@ -188,6 +240,7 @@ router.put("/:userId", (req, res) => {
 
                     }
 
+
                     // ========================================
                     // CREATE NEW PROFILE
                     // ========================================
@@ -200,24 +253,35 @@ router.put("/:userId", (req, res) => {
                                 user_id,
                                 skills,
                                 experience,
-                                bio
+                                bio,
+                                profile_photo
                             )
-                            VALUES (?, ?, ?, ?)
+                            VALUES (?, ?, ?, ?, ?)
                         `;
 
                         db.query(
                             insertSql,
                             [
                                 userId,
+
                                 skills || null,
-                                experience || null,
-                                bio || null
+
+                                experience !== undefined
+                                    ? experience
+                                    : null,
+
+                                bio || null,
+
+                                profile_photo || null
                             ],
                             (err) => {
 
                                 if (err) {
 
-                                    console.error(err);
+                                    console.error(
+                                        "Create Profile Error:",
+                                        err
+                                    );
 
                                     return res.status(500).json({
                                         success: false,

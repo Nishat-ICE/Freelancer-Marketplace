@@ -18,19 +18,26 @@ const reviewRoutes = require("./routes/reviews");
 
 const app = express();
 
+
 /* =========================
    MIDDLEWARE
 ========================= */
 
 app.use(cors());
-app.use(express.json());
+
+// Increased JSON limit for profile photo upload
+app.use(express.json({ limit: "6mb" }));
 
 
 /* =========================
    FRONTEND PATH
 ========================= */
 
-const frontendPath = path.resolve(__dirname, "..", "Frontend");
+const frontendPath = path.resolve(
+    __dirname,
+    "..",
+    "Frontend"
+);
 
 
 /* =========================
@@ -44,27 +51,60 @@ app.use(express.static(frontendPath));
    API ROUTES
 ========================= */
 
-app.use("/api/dashboard", dashboardRoutes);
+app.use(
+    "/api/dashboard",
+    dashboardRoutes
+);
 
-app.use("/api/categories", categoryRoutes);
+app.use(
+    "/api/categories",
+    categoryRoutes
+);
 
-app.use("/api/auth", authRoutes);
+app.use(
+    "/api/auth",
+    authRoutes
+);
 
-app.use("/api/projects", projectRoutes);
+app.use(
+    "/api/projects",
+    projectRoutes
+);
 
-app.use("/api/bids", bidRoutes);
+app.use(
+    "/api/bids",
+    bidRoutes
+);
 
-app.use("/api/messages", messageRoutes);
+app.use(
+    "/api/messages",
+    messageRoutes
+);
 
-app.use("/api/profile", profileRoutes);
+app.use(
+    "/api/profile",
+    profileRoutes
+);
 
-app.use("/api/payments", paymentRoutes);
+app.use(
+    "/api/payments",
+    paymentRoutes
+);
 
-app.use("/api/contracts", contractRoutes);
+app.use(
+    "/api/contracts",
+    contractRoutes
+);
 
-app.use("/api/notifications", notificationRoutes);
+app.use(
+    "/api/notifications",
+    notificationRoutes
+);
 
-app.use("/api/reviews", reviewRoutes);
+app.use(
+    "/api/reviews",
+    reviewRoutes
+);
 
 
 /* =========================
@@ -72,9 +112,14 @@ app.use("/api/reviews", reviewRoutes);
 ========================= */
 
 app.get("/", (req, res) => {
+
     res.sendFile(
-        path.join(frontendPath, "index.html")
+        path.join(
+            frontendPath,
+            "index.html"
+        )
     );
+
 });
 
 
@@ -97,14 +142,16 @@ app.get("/api/test-db", (req, res) => {
 
                 return res.status(500).json({
                     success: false,
-                    message: "Database connection failed!"
+                    message:
+                        "Database connection failed!"
                 });
 
             }
 
             res.json({
                 success: true,
-                message: "Database connection is working!",
+                message:
+                    "Database connection is working!",
                 result
             });
 
@@ -134,10 +181,14 @@ app.use("/api", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(
+    PORT,
+    "0.0.0.0",
+    () => {
 
-    console.log(
-        `🚀 Server running at http://localhost:${PORT}`
-    );
+        console.log(
+            `🚀 Server running at http://localhost:${PORT}`
+        );
 
-});
+    }
+);

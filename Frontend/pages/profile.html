@@ -5,13 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Profile | Freelancer Marketplace</title>
+    <title>
+        Profile | Freelancer Marketplace
+    </title>
 
-    <link rel="stylesheet"
-          href="../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
 
 
     <style>
@@ -41,6 +45,7 @@
 
         }
 
+
         .profile-header h2 {
 
             margin: 0 0 6px;
@@ -50,6 +55,7 @@
             font-size: 30px;
 
         }
+
 
         .profile-header p {
 
@@ -73,6 +79,8 @@
             grid-template-columns: 300px 1fr;
 
             gap: 22px;
+
+            width: 100%;
 
         }
 
@@ -104,13 +112,28 @@
         }
 
 
+        /* ========================================
+           PROFILE AVATAR
+        ======================================== */
+
+        .profile-photo-wrap {
+
+            width: 120px;
+
+            height: 120px;
+
+            margin: 0 auto 15px;
+
+        }
+
+
         .profile-avatar {
 
-            width: 100px;
+            width: 120px;
 
-            height: 100px;
+            height: 120px;
 
-            margin: 0 auto 18px;
+            margin: 0 auto;
 
             border-radius: 50%;
 
@@ -119,6 +142,8 @@
             align-items: center;
 
             justify-content: center;
+
+            overflow: hidden;
 
             color: white;
 
@@ -135,6 +160,88 @@
 
         }
 
+
+        .profile-avatar img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+        }
+
+
+        /* ========================================
+           PHOTO BUTTONS
+        ======================================== */
+
+        #profilePhotoInput {
+
+            display: none;
+
+        }
+
+
+        .photo-actions {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+        }
+
+
+        .photo-btn {
+
+            border: 1px solid #ddd8f0;
+
+            background: #f8f7fd;
+
+            color: #5d4bc5;
+
+            padding: 8px 12px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .photo-btn:hover {
+
+            background: #eeeafd;
+
+        }
+
+
+        .photo-hint {
+
+            margin: 8px 0 0;
+
+            color: #999;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+
+        }
+
+
+        /* ========================================
+           PROFILE NAME
+        ======================================== */
 
         .profile-name {
 
@@ -272,6 +379,10 @@
         }
 
 
+        /* ========================================
+           SAVE BUTTON
+        ======================================== */
+
         .save-profile-btn {
 
             border: none;
@@ -399,6 +510,38 @@
 
 
         /* ========================================
+           PROFILE PAGE POSITION
+        ======================================== */
+
+        .main-content {
+
+            margin-left: 335px !important;
+
+            width: calc(100% - 335px) !important;
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .profile-page {
+
+            width: 100%;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 35px 40px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* ========================================
            RESPONSIVE
         ======================================== */
 
@@ -415,17 +558,28 @@
 
         @media(max-width: 600px) {
 
+            .main-content {
+
+                margin-left: 70px !important;
+
+                width: calc(100% - 70px) !important;
+
+            }
+
+
             .profile-page {
 
                 padding: 20px;
 
             }
 
+
             .form-row {
 
                 grid-template-columns: 1fr;
 
             }
+
 
             .profile-info {
 
@@ -434,28 +588,7 @@
             }
 
         }
-/* ========================================
-   FIX PROFILE PAGE POSITION
-======================================== */
 
-.main-content {
-    margin-left: 335px !important;
-    width: calc(100% - 335px) !important;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-.profile-page {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 35px 40px;
-    box-sizing: border-box;
-}
-
-.profile-grid {
-    width: 100%;
-}
     </style>
 
 </head>
@@ -482,104 +615,152 @@
     <div class="sidebar-nav">
 
 
-        <a href="dashboard.html"
-           class="nav-item">
+        <a
+            href="dashboard.html"
+            class="nav-item">
 
             🏠
 
-            <span>Dashboard</span>
+            <span>
+                Dashboard
+            </span>
 
         </a>
 
 
-        <a href="projects.html"
-           class="nav-item">
+        <a
+            href="projects.html"
+            class="nav-item">
 
             📁
 
-            <span>Browse Projects</span>
+            <span>
+                Browse Projects
+            </span>
 
         </a>
 
 
-        <a href="my-projects.html"
-           class="nav-item client-only">
+        <a
+            href="my-projects.html"
+            class="nav-item client-only">
 
             📂
 
-            <span>My Projects</span>
+            <span>
+                My Projects
+            </span>
 
         </a>
 
 
-        <a href="bids.html"
-           class="nav-item freelancer-only">
+        <a
+            href="bids.html"
+            class="nav-item freelancer-only">
 
             📋
 
-            <span>My Bids</span>
+            <span>
+                My Bids
+            </span>
 
         </a>
 
 
-        <a href="messages.html"
-           class="nav-item">
+        <a
+            href="messages.html"
+            class="nav-item">
 
             💬
 
-            <span>Messages</span>
+            <span>
+                Messages
+            </span>
 
         </a>
 
 
-        <a href="notifications.html"
-           class="nav-item">
+        <a
+            href="notifications.html"
+            class="nav-item">
 
             🔔
 
-            <span>Notifications</span>
+            <span>
+                Notifications
+            </span>
 
         </a>
 
 
-        <a href="profile.html"
-           class="nav-item active">
+        <a
+            href="profile.html"
+            class="nav-item active">
 
             👤
 
-            <span>Profile</span>
+            <span>
+                Profile
+            </span>
 
         </a>
 
 
-        <a href="payment.html"
-           class="nav-item">
+        <a
+            href="payment.html"
+            class="nav-item">
 
             💳
 
-            <span>Payment</span>
+            <span>
+                Payment
+            </span>
 
         </a>
-<a href="contracts.html" class="nav-item">
-    📄 Contracts
-</a>
-<a href="reviews.html" class="nav-item">
-    ⭐ Reviews
-</a>
-        <a href="#"
-           class="nav-item"
-           onclick="logoutUser()">
+
+
+        <a
+            href="contracts.html"
+            class="nav-item">
+
+            📄
+
+            <span>
+                Contracts
+            </span>
+
+        </a>
+
+
+        <a
+            href="reviews.html"
+            class="nav-item">
+
+            ⭐
+
+            <span>
+                Reviews
+            </span>
+
+        </a>
+
+
+        <a
+            href="#"
+            class="nav-item"
+            onclick="logoutUser()">
 
             🚪
 
-            <span>Logout</span>
+            <span>
+                Logout
+            </span>
 
         </a>
 
     </div>
 
 </div>
-
 
 
 <!-- ========================================
@@ -591,9 +772,13 @@
     <div class="profile-page">
 
 
+        <!-- HEADER -->
+
         <div class="profile-header">
 
-            <h2>My Profile</h2>
+            <h2>
+                My Profile
+            </h2>
 
             <p>
                 Manage your personal and professional information
@@ -602,31 +787,92 @@
         </div>
 
 
-        <div id="profileLoading"
-             class="profile-loading">
+        <!-- LOADING -->
+
+        <div
+            id="profileLoading"
+            class="profile-loading">
 
             Loading profile...
 
         </div>
 
 
-        <div id="profileContent"
-             class="profile-grid"
-             style="display:none;">
+        <!-- PROFILE CONTENT -->
+
+        <div
+            id="profileContent"
+            class="profile-grid"
+            style="display:none;">
 
 
-            <!-- LEFT -->
+            <!-- ========================================
+                 LEFT PROFILE CARD
+            ======================================== -->
 
-            <div class="profile-card profile-left">
+            <div
+                class="profile-card profile-left">
 
-                <div
-                    id="profileAvatar"
-                    class="profile-avatar">
 
-                    ?
+                <!-- PROFILE PHOTO -->
+
+                <div class="profile-photo-wrap">
+
+                    <div
+                        id="profileAvatar"
+                        class="profile-avatar">
+
+                        ?
+
+                    </div>
 
                 </div>
 
+
+                <!-- FILE INPUT -->
+
+                <input
+                    type="file"
+                    id="profilePhotoInput"
+                    accept="image/jpeg,image/png,image/webp">
+
+
+                <!-- PHOTO BUTTONS -->
+
+                <div class="photo-actions">
+
+                    <button
+                        type="button"
+                        class="photo-btn"
+                        id="uploadPhotoBtn">
+
+                        Upload Photo
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="photo-btn"
+                        id="removePhotoBtn"
+                        style="display:none;">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+
+                <p class="photo-hint">
+
+                    JPG, PNG or WebP.
+                    Maximum 3 MB.
+
+                </p>
+
+
+                <!-- NAME -->
 
                 <h3
                     id="profileName"
@@ -637,6 +883,8 @@
                 </h3>
 
 
+                <!-- ROLE -->
+
                 <span
                     id="profileRole"
                     class="profile-role">
@@ -645,6 +893,8 @@
 
                 </span>
 
+
+                <!-- EMAIL -->
 
                 <div
                     id="profileEmail"
@@ -655,7 +905,10 @@
                 </div>
 
 
+                <!-- INFO -->
+
                 <div class="profile-info">
+
 
                     <div class="info-box">
 
@@ -688,15 +941,18 @@
 
                     </div>
 
+
                 </div>
 
             </div>
 
 
-
-            <!-- RIGHT -->
+            <!-- ========================================
+                 RIGHT EDIT CARD
+            ======================================== -->
 
             <div class="profile-card">
+
 
                 <h3>
                     Edit Profile
@@ -706,11 +962,16 @@
                 <form id="profileForm">
 
 
+                    <!-- NAME -->
+
                     <div class="form-group">
 
                         <label for="name">
+
                             Full Name
+
                         </label>
+
 
                         <input
                             type="text"
@@ -720,14 +981,19 @@
                     </div>
 
 
+                    <!-- SKILLS + EXPERIENCE -->
+
                     <div class="form-row">
 
 
                         <div class="form-group">
 
                             <label for="skills">
+
                                 Skills
+
                             </label>
+
 
                             <input
                                 type="text"
@@ -740,8 +1006,11 @@
                         <div class="form-group">
 
                             <label for="experience">
+
                                 Experience (Years)
+
                             </label>
+
 
                             <input
                                 type="number"
@@ -755,11 +1024,16 @@
                     </div>
 
 
+                    <!-- BIO -->
+
                     <div class="form-group">
 
                         <label for="bio">
+
                             Bio
+
                         </label>
+
 
                         <textarea
                             id="bio"
@@ -767,6 +1041,8 @@
 
                     </div>
 
+
+                    <!-- SAVE -->
 
                     <button
                         type="submit"
@@ -777,6 +1053,8 @@
 
                     </button>
 
+
+                    <!-- MESSAGE -->
 
                     <div
                         id="profileMessage"
@@ -796,7 +1074,6 @@
 </div>
 
 
-
 <script src="../js/script.js"></script>
 
 
@@ -812,7 +1089,8 @@ const user = getCurrentUser();
 
 if (!user) {
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
 }
 
@@ -822,10 +1100,14 @@ if (!user) {
 // ========================================
 
 const clientItems =
-    document.querySelectorAll(".client-only");
+    document.querySelectorAll(
+        ".client-only"
+    );
 
 const freelancerItems =
-    document.querySelectorAll(".freelancer-only");
+    document.querySelectorAll(
+        ".freelancer-only"
+    );
 
 
 if (user.role === "client") {
@@ -835,6 +1117,7 @@ if (user.role === "client") {
         item.style.display = "flex";
 
     });
+
 
     freelancerItems.forEach(item => {
 
@@ -850,6 +1133,7 @@ if (user.role === "client") {
 
     });
 
+
     freelancerItems.forEach(item => {
 
         item.style.display = "flex";
@@ -860,6 +1144,15 @@ if (user.role === "client") {
 
 
 // ========================================
+// PHOTO VARIABLES
+// ========================================
+
+let selectedPhoto = null;
+
+let existingPhoto = null;
+
+
+// ========================================
 // LOAD PROFILE
 // ========================================
 
@@ -867,11 +1160,10 @@ async function loadProfile() {
 
     try {
 
-        const response = await fetch(
-
-            `/api/profile/${user.user_id}`
-
-        );
+        const response =
+            await fetch(
+                `/api/profile/${user.user_id}`
+            );
 
 
         const data =
@@ -896,14 +1188,8 @@ async function loadProfile() {
 
 
         // ========================================
-        // DISPLAY
+        // PROFILE INFORMATION
         // ========================================
-
-        document.getElementById(
-            "profileAvatar"
-        ).textContent =
-            getInitial(profile.name);
-
 
         document.getElementById(
             "profileName"
@@ -926,23 +1212,46 @@ async function loadProfile() {
         document.getElementById(
             "profileExperience"
         ).textContent =
+
             profile.experience !== null &&
             profile.experience !== undefined
-                ? profile.experience + " years"
+
+                ? profile.experience +
+                  " years"
+
                 : "Not added";
 
 
         document.getElementById(
             "profileRating"
         ).textContent =
+
             profile.rating !== null &&
             profile.rating !== undefined
+
                 ? "★ " + profile.rating
+
                 : "0";
 
 
         // ========================================
-        // FORM
+        // PROFILE PHOTO
+        // ========================================
+
+        existingPhoto =
+            profile.profile_photo || null;
+
+        selectedPhoto = null;
+
+
+        renderProfilePhoto(
+            existingPhoto,
+            profile.name
+        );
+
+
+        // ========================================
+        // FORM VALUES
         // ========================================
 
         document.getElementById(
@@ -969,6 +1278,10 @@ async function loadProfile() {
             profile.bio || "";
 
 
+        // ========================================
+        // SHOW CONTENT
+        // ========================================
+
         document.getElementById(
             "profileLoading"
         ).style.display =
@@ -983,16 +1296,21 @@ async function loadProfile() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Profile Error:",
+            error
+        );
 
 
         document.getElementById(
             "profileLoading"
         ).innerHTML = `
 
-            <div style="color:#c03939;">
+            <div
+                style="color:#c03939;">
 
                 ⚠️
+
                 ${escapeHtml(
                     error.message
                 )}
@@ -1007,17 +1325,236 @@ async function loadProfile() {
 
 
 // ========================================
+// OPEN FILE SELECTOR
+// ========================================
+
+document
+    .getElementById(
+        "uploadPhotoBtn"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+            document
+                .getElementById(
+                    "profilePhotoInput"
+                )
+                .click();
+
+        }
+    );
+
+
+// ========================================
+// SELECT PHOTO
+// ========================================
+
+document
+    .getElementById(
+        "profilePhotoInput"
+    )
+    .addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            // ========================================
+            // SIZE
+            // ========================================
+
+            if (
+                file.size >
+                3 * 1024 * 1024
+            ) {
+
+                alert(
+                    "Photo is too large. Please choose an image smaller than 3 MB."
+                );
+
+
+                this.value = "";
+
+                return;
+
+            }
+
+
+            // ========================================
+            // TYPE
+            // ========================================
+
+            const allowedTypes = [
+
+                "image/jpeg",
+
+                "image/png",
+
+                "image/webp"
+
+            ];
+
+
+            if (
+                !allowedTypes.includes(
+                    file.type
+                )
+            ) {
+
+                alert(
+                    "Please choose a JPG, PNG or WebP image."
+                );
+
+
+                this.value = "";
+
+                return;
+
+            }
+
+
+            // ========================================
+            // READ PHOTO
+            // ========================================
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    selectedPhoto =
+                        event.target.result;
+
+
+                    renderProfilePhoto(
+                        selectedPhoto,
+                        document.getElementById(
+                            "name"
+                        ).value
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+
+
+// ========================================
+// REMOVE PHOTO
+// ========================================
+
+document
+    .getElementById(
+        "removePhotoBtn"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+
+            selectedPhoto = "";
+
+
+            renderProfilePhoto(
+                "",
+                document.getElementById(
+                    "name"
+                ).value
+            );
+
+
+            document.getElementById(
+                "profilePhotoInput"
+            ).value = "";
+
+        }
+    );
+
+
+// ========================================
+// DISPLAY PHOTO
+// ========================================
+
+function renderProfilePhoto(
+    photo,
+    name
+) {
+
+    const avatar =
+        document.getElementById(
+            "profileAvatar"
+        );
+
+
+    const removeButton =
+        document.getElementById(
+            "removePhotoBtn"
+        );
+
+
+    if (photo) {
+
+        avatar.innerHTML = `
+
+            <img
+                src="${photo}"
+                alt="Profile Photo">
+
+        `;
+
+
+        removeButton.style.display =
+            "inline-block";
+
+    } else {
+
+        avatar.textContent =
+            getInitial(name);
+
+
+        removeButton.style.display =
+            "none";
+
+    }
+
+}
+
+
+// ========================================
 // SAVE PROFILE
 // ========================================
 
 document
-    .getElementById("profileForm")
+    .getElementById(
+        "profileForm"
+    )
     .addEventListener(
         "submit",
-        async function(event) {
+        async function (event) {
 
             event.preventDefault();
 
+
+            // ========================================
+            // GET VALUES
+            // ========================================
 
             const name =
                 document.getElementById(
@@ -1055,48 +1592,110 @@ document
                 );
 
 
-            button.disabled = true;
+            // ========================================
+            // VALIDATE NAME
+            // ========================================
+
+            if (!name) {
+
+                message.className =
+                    "profile-message error";
+
+
+                message.textContent =
+                    "Name is required.";
+
+
+                return;
+
+            }
+
+
+            // ========================================
+            // BUTTON
+            // ========================================
+
+            button.disabled =
+                true;
+
 
             button.textContent =
                 "Saving...";
 
 
-            message.textContent = "";
+            message.textContent =
+                "";
 
 
             try {
 
+
+                // ========================================
+                // PHOTO VALUE
+                // ========================================
+
+                let photoToSave;
+
+
+                if (
+                    selectedPhoto !== null
+                ) {
+
+                    photoToSave =
+                        selectedPhoto;
+
+                } else {
+
+                    photoToSave =
+                        existingPhoto;
+
+                }
+
+
+                // ========================================
+                // SEND TO SERVER
+                // ========================================
+
                 const response =
                     await fetch(
-
                         `/api/profile/${user.user_id}`,
-
                         {
 
                             method: "PUT",
 
                             headers: {
+
                                 "Content-Type":
                                     "application/json"
+
                             },
 
-                            body: JSON.stringify({
+                            body:
+                                JSON.stringify({
 
-                                name: name,
+                                    name:
+                                        name,
 
-                                skills: skills,
+                                    skills:
+                                        skills,
 
-                                experience:
-                                    experience
-                                        ? Number(experience)
-                                        : null,
+                                    experience:
+                                        experience
+                                            ? Number(
+                                                experience
+                                              )
+                                            : null,
 
-                                bio: bio
+                                    bio:
+                                        bio,
 
-                            })
+                                    profile_photo:
+                                        photoToSave ||
+                                        null
+
+                                })
 
                         }
-
                     );
 
 
@@ -1117,6 +1716,10 @@ document
                 }
 
 
+                // ========================================
+                // SUCCESS
+                // ========================================
+
                 message.className =
                     "profile-message success";
 
@@ -1125,8 +1728,10 @@ document
                     "Profile updated successfully!";
 
 
-                // Update local user name
-                user.name = name;
+                // Update local user
+                user.name =
+                    name;
+
 
                 localStorage.setItem(
                     "currentUser",
@@ -1134,12 +1739,16 @@ document
                 );
 
 
+                // Reload profile
                 await loadProfile();
 
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Save Profile Error:",
+                    error
+                );
 
 
                 message.className =
@@ -1149,9 +1758,12 @@ document
                 message.textContent =
                     error.message;
 
+
             } finally {
 
-                button.disabled = false;
+                button.disabled =
+                    false;
+
 
                 button.textContent =
                     "Save Changes";
@@ -1163,7 +1775,7 @@ document
 
 
 // ========================================
-// HELPERS
+// GET INITIAL
 // ========================================
 
 function getInitial(name) {
@@ -1174,12 +1786,17 @@ function getInitial(name) {
 
     }
 
+
     return name
         .charAt(0)
         .toUpperCase();
 
 }
 
+
+// ========================================
+// ESCAPE HTML
+// ========================================
 
 function escapeHtml(value) {
 
@@ -1192,12 +1809,33 @@ function escapeHtml(value) {
 
     }
 
+
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
