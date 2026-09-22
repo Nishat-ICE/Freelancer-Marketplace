@@ -869,7 +869,7 @@ async function loadProfile() {
 
         const response = await fetch(
 
-            `http://localhost:5000/api/profile/${user.user_id}`
+            `/api/profile/${user.user_id}`
 
         );
 
@@ -1069,7 +1069,7 @@ document
                 const response =
                     await fetch(
 
-                        `http://localhost:5000/api/profile/${user.user_id}`,
+                        `/api/profile/${user.user_id}`,
 
                         {
 

@@ -1038,7 +1038,7 @@ async function loadSummary() {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/summary/${user.user_id}`
+            `/api/payments/summary/${user.user_id}`
         );
 
 
@@ -1108,7 +1108,7 @@ async function loadContracts() {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/payments/contracts/${user.user_id}`
+            `/api/payments/contracts/${user.user_id}`
         );
 
 
@@ -1339,7 +1339,7 @@ document
 
                 const response =
                     await fetch(
-                        "http://localhost:5000/api/payments",
+                        "/api/payments",
                         {
                             method: "POST",
 
@@ -1470,7 +1470,7 @@ async function loadPayments() {
 
         const response =
             await fetch(
-                `http://localhost:5000/api/payments/my/${user.user_id}`
+                `/api/payments/my/${user.user_id}`
             );
 
 

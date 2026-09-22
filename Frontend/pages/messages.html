@@ -988,7 +988,7 @@ async function loadContacts() {
 
         const response = await fetch(
 
-            `http://localhost:5000/api/messages/users/${user.user_id}`
+            `/api/messages/users/${user.user_id}`
 
         );
 
@@ -1200,7 +1200,7 @@ async function getContact(userId) {
 
         const response = await fetch(
 
-            `http://localhost:5000/api/messages/users/${user.user_id}`
+            `/api/messages/users/${user.user_id}`
 
         );
 
@@ -1247,7 +1247,7 @@ async function loadConversation() {
 
         const response = await fetch(
 
-            `http://localhost:5000/api/messages/conversation/${user.user_id}/${selectedUser}`
+            `/api/messages/conversation/${user.user_id}/${selectedUser}`
 
         );
 
@@ -1424,7 +1424,7 @@ document
 
                 const response =
                     await fetch(
-                        "http://localhost:5000/api/messages",
+                        "/api/messages",
                         {
 
                             method: "POST",
